@@ -11,8 +11,4 @@
     <ProjectReference Include="..\CarRental.Domain\CarRental.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
-
 </Project>

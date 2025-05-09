@@ -1,5 +1,5 @@
 ﻿namespace CarRental.Persistence {
-    public class DbInfo {
-
+    internal static class DbInfo {
+        internal const string ConnectionString = @"";
     }
 }
