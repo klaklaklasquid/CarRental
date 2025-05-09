@@ -8,4 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarRental.DataInjectionPresentation\CarRental.DataInjectionPresentation.csproj" />
+    <ProjectReference Include="..\CarRental.Domain\CarRental.Domain.csproj" />
+    <ProjectReference Include="..\CarRental.Persistence\CarRental.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

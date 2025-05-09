@@ -1,6 +1,6 @@
 
 namespace CarRental.DataInjectionPresentation {
-    public class Class1 {
+    public class CarRentalDataInjectionApplication {
     }
 
 }
