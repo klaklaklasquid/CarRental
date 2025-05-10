@@ -1,4 +1,6 @@
 ﻿using CarRental.Domain.Repository;
+using Microsoft.Win32;
+
 
 namespace CarRental.Domain {
     public class DomainManager {
