@@ -13,5 +13,11 @@ namespace CarRental.Domain {
             _customerRepository = customerRepository;
             _establishmentRepository = establishmentRepository;
         }
+
+        public void WipeAll() {
+            _establishmentRepository.WipeDatabase();
+            _customerRepository.WipeDatabase();
+            _carRepository.WipeDatabase();
+        }
     }
 }

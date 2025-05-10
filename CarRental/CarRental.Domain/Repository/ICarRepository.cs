@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRental.Domain.Repository
-{
-    public interface ICarRepository
-    {
+namespace CarRental.Domain.Repository {
+    public interface ICarRepository {
+        void WipeDatabase();
     }
 }
