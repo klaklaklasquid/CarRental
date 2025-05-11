@@ -60,7 +60,7 @@ namespace CarRental.Persistence.Mapper {
                         !string.IsNullOrWhiteSpace(zipcode) &&
                         !string.IsNullOrWhiteSpace(city) &&
                         !string.IsNullOrWhiteSpace(country) &&
-                        zipcode.All(char.IsDigit) &&
+                        zipcode.Any(char.IsDigit) &&
                         !ContainsDigits(airport) &&
                         !ContainsDigits(city) &&
                         !ContainsDigits(country);

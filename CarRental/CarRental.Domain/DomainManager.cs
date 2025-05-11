@@ -25,7 +25,5 @@ namespace CarRental.Domain {
             _carRepository.InitData(carCsv);
             _customerRepository.InitData(customerCsv);
         }
-
-        
     }
 }
