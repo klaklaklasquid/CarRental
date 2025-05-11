@@ -19,7 +19,7 @@ namespace CarRental.Persistence.Mapper {
             try {
                 _connection.Open();
                 using SqlCommand command = new("DELETE FROM Klanten", _connection);
-                using SqlDataReader reader = command.ExecuteReader();
+                command.ExecuteReader();
             } finally {
                 _connection.Close();
             }
