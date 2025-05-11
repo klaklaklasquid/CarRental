@@ -33,7 +33,7 @@ namespace CarRental.Persistence.Mapper {
             HashSet<string> seenEntries = new();
 
             // creating the error log file
-            string folderPath = Path.GetDirectoryName(csvFile);
+            string? folderPath = Path.GetDirectoryName(csvFile) ?? throw new Exception("Error: folder path is null");
             string errorFilePath = Path.Combine(folderPath, "foutbestandEstablishments.csv");
 
             try {
