@@ -10,7 +10,7 @@ namespace CarRental.DataInjectionPresentation {
         public CarRentalDataInjectionApplication(DomainManager domainManager) {
             _domainManager = domainManager;
 
-            _injectDataWindow = new InjectDataWindow();
+            _injectDataWindow = new InjectDataWindow(_domainManager);
             _injectDataWindow.Show();
         }
     }

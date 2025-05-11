@@ -25,5 +25,13 @@ namespace CarRental.Persistence.Mapper {
             }
 
         }
+
+        public void InitData(string csvFile) {
+            try {
+                _connection.Open();
+            } finally {
+                _connection.Close();
+            }
+        }
     }
 }

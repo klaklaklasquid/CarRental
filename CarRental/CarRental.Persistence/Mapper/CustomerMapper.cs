@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CarRental.Persistence.Mapper {
     public class CustomerMapper : ICustomerRepository {
         private SqlConnection _connection;
-        
+
         public CustomerMapper() {
             _connection = new SqlConnection(DbInfo.ConnectionString);
         }
@@ -24,6 +24,14 @@ namespace CarRental.Persistence.Mapper {
                 _connection.Close();
             }
 
+        }
+
+        public void InitData(string csvFile) {
+            try {
+                _connection.Open();
+            } finally {
+                _connection.Close();
+            }
         }
     }
 }

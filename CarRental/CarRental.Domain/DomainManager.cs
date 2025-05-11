@@ -19,5 +19,13 @@ namespace CarRental.Domain {
             _customerRepository.WipeDatabase();
             _carRepository.WipeDatabase();
         }
+
+        public void InitData(string establishmentCsv, string carCsv, string customerCsv) {
+            _establishmentRepository.InitData(establishmentCsv);
+            _carRepository.InitData(carCsv);
+            _customerRepository.InitData(customerCsv);
+        }
+
+        
     }
 }

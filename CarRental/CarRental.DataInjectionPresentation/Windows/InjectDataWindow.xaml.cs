@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CarRental.Domain;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,11 @@ namespace CarRental.DataInjectionPresentation.Windows {
     /// Interaction logic for InjectDataWindow.xaml
     /// </summary>
     public partial class InjectDataWindow : Window {
-        public InjectDataWindow() {
+        private readonly DomainManager _domainManager;
+
+        public InjectDataWindow(DomainManager domainManager) {
             InitializeComponent();
+            _domainManager = domainManager;
         }
 
         private string SelectPathName() {
@@ -54,7 +58,29 @@ namespace CarRental.DataInjectionPresentation.Windows {
         }
 
         private void Click_Send_Data(object sender, RoutedEventArgs e) {
+            try {
+                // Wipe all data before injecting new data
+                _domainManager.WipeAll();
 
+                // Initialize data from CSV files
+                _domainManager.InitData(
+                    FilePathEstablishment.Text,
+                    FilePathCar.Text,
+                    FilePathCustomer.Text
+                );
+            } catch (Exception ex) {
+                Error_Message(ex.Message);
+            } finally {
+                // Show success message
+                MessageBox.Show("Data has been successfully injected.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Close the window
+                this.Close();
+            }
+        }
+
+        public void Error_Message(string message) {
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
