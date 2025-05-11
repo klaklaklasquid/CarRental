@@ -73,9 +73,6 @@ namespace CarRental.DataInjectionPresentation.Windows {
             } finally {
                 // Show success message
                 MessageBox.Show("Data has been successfully injected.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                // Close the window
-                this.Close();
             }
         }
 
