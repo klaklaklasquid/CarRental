@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace CarRental.Presentation.Windows
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class MainWindow : Window
     {
-        public TestWindow()
+        public MainWindow()
         {
             InitializeComponent();
         }

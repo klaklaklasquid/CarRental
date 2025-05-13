@@ -5,14 +5,13 @@ using CarRental.Presentation.Windows;
 namespace CarRental.Presentation {
     public class CarRentalApplication {
         private readonly DomainManager _domainManager;
-
-        private readonly TestWindow _testWindow;
+        private readonly MainWindow _mainWindow;
 
         public CarRentalApplication(DomainManager domainManager) {
             _domainManager = domainManager;
 
-            _testWindow = new TestWindow();
-            _testWindow.Show();
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
         }
     }
 }
