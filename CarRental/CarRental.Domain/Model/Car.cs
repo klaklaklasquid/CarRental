@@ -62,6 +62,7 @@ namespace CarRental.Domain.Model {
         }
 
         private string _engineType = string.Empty;
+        private readonly string[] allowedEngineTypes = new[] { "Diesel", "Electric", "Gasoline", "Hybrid" };
 
         public string EngineType {
             get { return _engineType; }
@@ -69,13 +70,9 @@ namespace CarRental.Domain.Model {
                 if (string.IsNullOrWhiteSpace(value)) {
                     throw new ArgumentException("Engine type cannot be null, empty or whitespace.", nameof(EngineType));
                 }
-                if (value != "Diesel" &&
-                    value != "Elektrisch" &&
-                    value != "Benzine" &&
-                    value != "Hybride") {
+                if (!allowedEngineTypes.Contains(value)) {
                     throw new ArgumentException("Engine type must be either Diesel, Gasoline, Electric or Hybrid.", nameof(EngineType));
                 }
-                _engineType = value;
             }
         }
 

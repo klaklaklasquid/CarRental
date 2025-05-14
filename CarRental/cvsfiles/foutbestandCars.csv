@@ -1,3 +1,8 @@
-FR-WRP-897;Nissan Leaf;0;Electric
-NL-PRN-604;Skoda Octavia;4;LPG
-SE-GRJ-600;;4;Electric
+50;ES-DTT194;Tesla Model 3;5;Electric;Error: Licence plate must be in the format XX-XXX-000. (Parameter 'LicencePlate')
+51;ES-EDZ-148;Ford Fiesta;100;Electric;Error: Seats must be between 2 and 10. (Parameter 'Seats')
+85;FR_GZX-442;Renault Clio;7;Hybrid;Error: Licence plate must be in the format XX-XXX-000. (Parameter 'LicencePlate')
+91;FR-WRP-897;Nissan Leaf;0;Electric;Error: Seats must be between 2 and 10. (Parameter 'Seats')
+95;ITA-HFC-582;Toyota Corolla;7;Electric;Error: Licence plate must be in the format XX-XXX-000. (Parameter 'LicencePlate')
+107;NL-PRN-604;Skoda Octavia;4;LPG;Error: Engine type must be either Diesel, Gasoline, Electric or Hybrid. (Parameter 'EngineType')
+137;SE-GNU--816;Seat Leon;5;Diesel;Error: Licence plate must be in the format XX-XXX-000. (Parameter 'LicencePlate')
+138;SE-GRJ-600;;4;Electric;Error: Brand cannot be null, empty or whitespace. (Parameter 'Brand')
