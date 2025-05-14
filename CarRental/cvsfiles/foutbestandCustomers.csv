@@ -1,11 +1,11 @@
-Emma;Rossi;emma.rossi@example.com;Via Roma 1;3459;;Nederland
-Max;Ivanov;max.ivanov@example;Gran Via 159;8167;Brussel;België
-Lucas;Jansen;lucas.jansen@example.com.Via Roma 61;1486;Rome;Italië
-Sophie;Ivanov;sophie.ivanov@@example.com;Hoofdweg 189;1163;Madrid;Spanje
-Anna;Kowalski;anna.kowalski@example.com,Hoofdweg 73;3067;Dublin;Ierland
-Liam;Garcia;liam.garcia@example.com;Gran Via 91;9592;Warschau;
-Mila;Rossi;mila.rossi@example.com;Ulica Marszałkowska 115;9737;Rome;
-Anna;Ivanov;anna.ivanov@example.com;;Ulica Marszałkowska 190;7027;Amsterdam;Nederland
-Noah;Schmidt;noah.schmidt@example.com;Gran Via;9899;Dublin;Ierland
-Mila;;mila.jansen@example.com;Gran Via 176;6648;Amsterdam;Nederland
-;Dubois;max.dubois@example.com;Gran Via 171;5867;Parijs;Frankrijk
+11;Emma;Rossi;emma.rossi@example.com;Via Roma 1;3459;;Nederland;Error: City cannot be null, empty or whitespace (Parameter 'LastName')
+20;Max;Ivanov;max.ivanov@example;Gran Via 159;8167;Brussel;België;Error: Email is not valid (Parameter 'Email')
+33;Lucas;Jansen;lucas.jansen@example.com.Via Roma 61;1486;Rome;Italië;Error: Not enough columns
+56;Sophie;Ivanov;sophie.ivanov@@example.com;Hoofdweg 189;1163;Madrid;Spanje;Error: Email is not valid (Parameter 'Email')
+79;Anna;Kowalski;anna.kowalski@example.com,Hoofdweg 73;3067;Dublin;Ierland;Error: Not enough columns
+86;Liam;Garcia;liam.garcia@example.com;Gran Via 91;9592;Warschau;;Error: Country cannot be null, empty or whitespace (Parameter 'LastName')
+87;Mila;Rossi;mila.rossi@example.com;Ulica Marszałkowska 115;9737;Rome;;Error: Country cannot be null, empty or whitespace (Parameter 'LastName')
+88;Anna;Ivanov;anna.ivanov@example.com;;Ulica Marszałkowska 190;7027;Amsterdam;Nederland;Error: Street cannot be null, empty or whitespace (Parameter 'LastName')
+92;Noah;Schmidt;noah.schmidt@example.com;Gran Via;9899;Dublin;Ierland;Error: Street must contain at least one number (Parameter 'LastName')
+97;Mila;;mila.jansen@example.com;Gran Via 176;6648;Amsterdam;Nederland;Error: Last name cannot be null, empty or whitespace (Parameter 'LastName')
+142;;Dubois;max.dubois@example.com;Gran Via 171;5867;Parijs;Frankrijk;Error: First name cannot be null, empty or whitespace (Parameter 'FirstName')

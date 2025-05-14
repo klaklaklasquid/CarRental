@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Repository;
+﻿using CarRental.Domain.Model;
+using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,17 @@ namespace CarRental.Persistence.Mapper {
             try {
                 _connection.Open();
 
+                int lineNumber = 2; // Start at 2 because Skip(1) skips the header (line 1)
                 foreach (string line in lines.Skip(1)) {
                     string[] values = line.Split(';');
 
                     if (values.Length < 7) {
-                        errorLines.Add(line);
+                        errorLines.Add($"{lineNumber};{line};Error: Not enough columns");
+                        lineNumber++;
                         continue;
                     }
 
+                    // for ease of use, trim the values
                     string firstName = values[0].Trim();
                     string lastName = values[1].Trim();
                     string email = values[2].Trim();
@@ -55,56 +59,38 @@ namespace CarRental.Persistence.Mapper {
                     string city = values[5].Trim();
                     string country = values[6].Trim();
 
-                    // validation rules
-                    bool isFilledIn =
-                        !string.IsNullOrWhiteSpace(firstName) &&
-                        !string.IsNullOrWhiteSpace(lastName) &&
-                        !string.IsNullOrWhiteSpace(email) &&
-                        !string.IsNullOrWhiteSpace(street) &&
-                        !string.IsNullOrWhiteSpace(zipcode) &&
-                        !string.IsNullOrWhiteSpace(city) &&
-                        !string.IsNullOrWhiteSpace(country) &&
-                        zipcode.Any(char.IsDigit) &&
-                        street.Any(char.IsDigit) &&
-                        !firstName.Any(char.IsDigit) &&
-                        !lastName.Any(char.IsDigit) &&
-                        !city.Any(char.IsDigit) &&
-                        !country.Any(char.IsDigit);
-
-                    // email validation
-                    string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-                    bool isValidEmail = Regex.IsMatch(email, pattern);
-
-                    bool isValid =
-                        isFilledIn &&
-                        isValidEmail &&
-                        !seenEntries.Contains(email.ToLower());
-
-                    if (!isValid) {
-                        errorLines.Add(line);
-                        continue;
-                    }
-
                     // check for duplicates
                     string entry = $"{firstName};{lastName};{email};{street};{zipcode};{city};{country}";
                     if (seenEntries.Contains(entry)) {
-                        errorLines.Add(line);
+                        errorLines.Add($"{lineNumber};{line};Error: Duplicate entry");
+                        lineNumber++;
                         continue;
                     }
                     seenEntries.Add(entry);
 
-                    // insert into database
-                    using SqlCommand command =
-                        new("INSERT INTO Klanten (Voornaam, Achternaam, Email, Straat, Postcode, Woonplaats, Land) VALUES (@firstName, @lastName, @email, @street, @zipcode, @city, @country)", _connection);
-                    command.Parameters.AddWithValue("@firstName", firstName);
-                    command.Parameters.AddWithValue("@lastName", lastName);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@street", street);
-                    command.Parameters.AddWithValue("@zipcode", zipcode);
-                    command.Parameters.AddWithValue("@city", city);
-                    command.Parameters.AddWithValue("@country", country);
-                    command.ExecuteNonQuery();
+                    // make object and then insert into database
+                    try {
+                        Customer customer = new(firstName, lastName, email, street, zipcode, city, country);
 
+
+                        // insert into database
+                        using SqlCommand command =
+                            new("INSERT INTO Klanten (Voornaam, Achternaam, Email, Straat, Postcode, Woonplaats, Land) VALUES (@firstName, @lastName, @email, @street, @zipcode, @city, @country)", _connection);
+                        command.Parameters.AddWithValue("@firstName", firstName);
+                        command.Parameters.AddWithValue("@lastName", lastName);
+                        command.Parameters.AddWithValue("@email", email);
+                        command.Parameters.AddWithValue("@street", street);
+                        command.Parameters.AddWithValue("@zipcode", zipcode);
+                        command.Parameters.AddWithValue("@city", city);
+                        command.Parameters.AddWithValue("@country", country);
+                        command.ExecuteNonQuery();
+
+                    } catch (Exception ex) {
+                        errorLines.Add($"{lineNumber};{line};Error: {ex.Message}");
+                        lineNumber++;
+                        continue;
+                    }
+                    lineNumber++;
                 }
             } catch (Exception ex) {
                 throw new Exception("Error while inserting Customers into the database: " + ex.Message, ex);

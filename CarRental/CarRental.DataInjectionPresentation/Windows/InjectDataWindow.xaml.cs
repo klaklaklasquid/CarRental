@@ -68,16 +68,12 @@ namespace CarRental.DataInjectionPresentation.Windows {
                     FilePathCar.Text,
                     FilePathCustomer.Text
                 );
-            } catch (Exception ex) {
-                Error_Message(ex.Message);
-            } finally {
+
                 // Show success message
                 MessageBox.Show("Data has been successfully injected.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        public void Error_Message(string message) {
-            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

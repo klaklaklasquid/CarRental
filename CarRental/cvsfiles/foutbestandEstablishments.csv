@@ -1,5 +1,8 @@
-Charles de Gaulle;Rue des Halles 95700;Roissy-en-France;Parijs;Frankrijk
-Frankfurt am Main;Flughafenstraße 60549;Frankfurt am Main;Duitsland
-Barajas;Avda. de la Hispanidad;28042;Madrid;Sp4nje
-;Carretera del Prat;08820;Barcelona;Spanje
-;Malpensa;Via Giovanni Antonio Amadeo;21010;Milaan;Italië
+3;Charles de Gaulle;Rue des Halles 95700;Roissy-en-France;Parijs;Frankrijk;Error: Zipcode must contain at least one number. (Parameter 'Zipcode')
+4;Frankfurt am Main;Flughafenstraße 60549;Frankfurt am Main;Duitsland;Error: Not enough columns
+5;Barajas;Avda. de la Hispanidad;28042;Madrid;Sp4nje;Error: Street must contain at least one number. (Parameter 'Street')
+6;;Carretera del Prat;08820;Barcelona;Spanje;Error: Airport cannot be null, empty or whitespace. (Parameter 'Airport')
+7;;Malpensa;Via Giovanni Antonio Amadeo;21010;Milaan;Italië;Error: Airport cannot be null, empty or whitespace. (Parameter 'Airport')
+8;Zaventem;Leopoldlaan;19A30;Brussel;België;Error: Street must contain at least one number. (Parameter 'Street')
+10;Vantaa;Lentäjäntie;01530;Helsinki;Finland;Error: Street must contain at least one number. (Parameter 'Street')
+11;Arlanda;Arlanda Flygplats;190 45;Stockholm;Zweden;Error: Street must contain at least one number. (Parameter 'Street')

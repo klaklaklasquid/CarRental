@@ -47,8 +47,9 @@ namespace CarRental.Persistence.Mapper {
                     }
                 }
 
-                if (airportIds.Count == 0)
+                if (airportIds.Count == 0) {
                     throw new Exception("Error: no airports found in the database");
+                }
 
                 int airportIndex = 0;
 

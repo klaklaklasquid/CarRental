@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Repository;
+﻿using CarRental.Domain.Model;
+using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,6 @@ namespace CarRental.Persistence.Mapper {
         public EstablishmentMapper() {
             _connection = new SqlConnection(DbInfo.ConnectionString);
         }
-
-        private bool ContainsDigits(string str) => str.Any(char.IsDigit);
 
         public void WipeDatabase() {
             try {
@@ -39,54 +38,51 @@ namespace CarRental.Persistence.Mapper {
             try {
                 _connection.Open();
 
+                int lineNumber = 2; // Start at 2 because Skip(1) skips the header (line 1)
                 foreach (string line in lines.Skip(1)) {
                     string[] values = line.Split(';');
 
                     if (values.Length < 5) {
-                        errorLines.Add(line);
+                        errorLines.Add($"{lineNumber};{line};Error: Not enough columns");
+                        lineNumber++;
                         continue;
                     }
 
+                    // for ease of use, trim the values
                     string airport = values[0].Trim();
                     string street = values[1].Trim();
                     string zipcode = values[2].Trim();
                     string city = values[3].Trim();
                     string country = values[4].Trim();
 
-                    // validation rules
-                    bool isValid =
-                        !string.IsNullOrWhiteSpace(airport) &&
-                        !string.IsNullOrWhiteSpace(street) &&
-                        !string.IsNullOrWhiteSpace(zipcode) &&
-                        !string.IsNullOrWhiteSpace(city) &&
-                        !string.IsNullOrWhiteSpace(country) &&
-                        zipcode.Any(char.IsDigit) &&
-                        !ContainsDigits(airport) &&
-                        !ContainsDigits(city) &&
-                        !ContainsDigits(country);
-
-                    if (!isValid) {
-                        errorLines.Add(line);
-                        continue;
-                    }
-
                     // check for duplicates
                     string entry = $"{airport};{street};{zipcode};{city};{country}".ToLower();
                     if (seenEntries.Contains(entry)) {
-                        errorLines.Add(line);
+                        errorLines.Add($"{lineNumber};{line};Error: Duplicate entry");
+                        lineNumber++;
                         continue;
                     }
                     seenEntries.Add(entry);
 
-                    // insert into database
-                    using SqlCommand command =
+                    // make object and then insert into database
+                    try {
+                        Establishment establishment = new(airport, street, zipcode, city, country);
+
+                        // insert into database
+                        using SqlCommand command =
                         new("INSERT INTO Vestigingen (Luchthaven, Straat, Postcode, Plaats, Land) VALUES (@airport, @street, @zipcode, @city, @country)", _connection);
-                    command.Parameters.AddWithValue("@airport", airport);
-                    command.Parameters.AddWithValue("@street", street);
-                    command.Parameters.AddWithValue("@zipcode", zipcode);
-                    command.Parameters.AddWithValue("@city", city);
-                    command.Parameters.AddWithValue("@country", country);
-                    command.ExecuteNonQuery();
+                        command.Parameters.AddWithValue("@airport", establishment.Airport);
+                        command.Parameters.AddWithValue("@street", establishment.Street);
+                        command.Parameters.AddWithValue("@zipcode", establishment.Zipcode);
+                        command.Parameters.AddWithValue("@city", establishment.City);
+                        command.Parameters.AddWithValue("@country", establishment.Country);
+                        command.ExecuteNonQuery();
+                    } catch (Exception ex) {
+                        errorLines.Add($"{lineNumber};{line};Error: {ex.Message}");
+                        lineNumber++;
+                        continue;
+                    }
+                    lineNumber++;
                 }
 
             } catch (Exception ex) {
@@ -96,7 +92,7 @@ namespace CarRental.Persistence.Mapper {
 
                 // write error file if needed
                 if (errorLines.Count > 0) {
-                    if(File.Exists(errorFilePath)) {
+                    if (File.Exists(errorFilePath)) {
                         File.Delete(errorFilePath);
                     }
 
