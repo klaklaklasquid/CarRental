@@ -1,11 +1,76 @@
 11;Emma;Rossi;emma.rossi@example.com;Via Roma 1;3459;;Nederland;Error: City cannot be null, empty or whitespace (Parameter 'LastName')
+13;Anna;Jansen;anna.jansen@example.com;Tverskaya 158;8402;Amsterdam;Nederland;Error: Duplicate email
 20;Max;Ivanov;max.ivanov@example;Gran Via 159;8167;Brussel;België;Error: Email is not valid (Parameter 'Email')
+24;Anna;Jansen;anna.jansen@example.com;Rue de la Paix 84;5834;Dublin;Ierland;Error: Duplicate email
+28;Julia;Schmidt;julia.schmidt@example.com;Dorpsstraat 113;9094;Rome;Italië;Error: Duplicate email
+32;Anna;Jansen;anna.jansen@example.com;Baker Street 70;2132;Dublin;Ierland;Error: Duplicate email
 33;Lucas;Jansen;lucas.jansen@example.com.Via Roma 61;1486;Rome;Italië;Error: Not enough columns
+43;Julia;Garcia;julia.garcia@example.com;Gran Via 46;2996;Dublin;Ierland;Error: Duplicate email
+47;Lucas;Kowalski;lucas.kowalski@example.com;Hoofdweg 184;6648;Brussel;België;Error: Duplicate email
+53;Anna;Ivanov;anna.ivanov@example.com;Ulica Marszałkowska 188;5829;Krakau;Polen;Error: Duplicate email
+55;Mila;Schmidt;mila.schmidt@example.com;Ulica Marszałkowska 29;4038;Parijs;Frankrijk;Error: Duplicate email
 56;Sophie;Ivanov;sophie.ivanov@@example.com;Hoofdweg 189;1163;Madrid;Spanje;Error: Email is not valid (Parameter 'Email')
+57;Julia;Garcia;julia.garcia@example.com;Aleje Jerozolimskie 183;9226;Berlijn;Duitsland;Error: Duplicate email
+58;Julia;Peeters;julia.peeters@example.com;Tverskaya 145;7273;Madrid;Spanje;Error: Duplicate email
+60;Finn;Peeters;finn.peeters@example.com;Hoofdweg 97;2361;Amsterdam;Nederland;Error: Duplicate email
+62;Lucas;Kowalski;lucas.kowalski@example.com;Dorpsstraat 37;7544;Krakau;Polen;Error: Duplicate email
+63;Noah;Ivanov;noah.ivanov@example.com;Via Roma 1;3843;Dublin;Ierland;Error: Duplicate email
+64;Lucas;Ivanov;lucas.ivanov@example.com;Rue de la Paix 6;1253;Berlijn;Duitsland;Error: Duplicate email
+67;Liam;Schmidt;liam.schmidt@example.com;Via Roma 121;8937;Parijs;Frankrijk;Error: Duplicate email
+72;Anna;Dubois;anna.dubois@example.com;Rue de la Paix 187;1455;Amsterdam;Nederland;Error: Duplicate email
+73;Anna;Rossi;anna.rossi@example.com;Dorpsstraat 146;7235;Amsterdam;Nederland;Error: Duplicate email
+74;Mila;Jansen;mila.jansen@example.com;O'Connell Street 106;6601;Dublin;Ierland;Error: Duplicate email
+75;Noah;Kowalski;noah.kowalski@example.com;Dorpsstraat 146;8598;Amsterdam;Nederland;Error: Duplicate email
+76;Anna;Rossi;anna.rossi@example.com;Aleje Jerozolimskie 170;4566;Krakau;Polen;Error: Duplicate email
+77;Liam;Schmidt;liam.schmidt@example.com;Gran Via 179;4309;Berlijn;Duitsland;Error: Duplicate email
+78;Emma;Schmidt;emma.schmidt@example.com;Tverskaya 58;8977;Moskou;Rusland;Error: Duplicate email
 79;Anna;Kowalski;anna.kowalski@example.com,Hoofdweg 73;3067;Dublin;Ierland;Error: Not enough columns
-86;Liam;Garcia;liam.garcia@example.com;Gran Via 91;9592;Warschau;;Error: Country cannot be null, empty or whitespace (Parameter 'LastName')
-87;Mila;Rossi;mila.rossi@example.com;Ulica Marszałkowska 115;9737;Rome;;Error: Country cannot be null, empty or whitespace (Parameter 'LastName')
-88;Anna;Ivanov;anna.ivanov@example.com;;Ulica Marszałkowska 190;7027;Amsterdam;Nederland;Error: Street cannot be null, empty or whitespace (Parameter 'LastName')
-92;Noah;Schmidt;noah.schmidt@example.com;Gran Via;9899;Dublin;Ierland;Error: Street must contain at least one number (Parameter 'LastName')
-97;Mila;;mila.jansen@example.com;Gran Via 176;6648;Amsterdam;Nederland;Error: Last name cannot be null, empty or whitespace (Parameter 'LastName')
-142;;Dubois;max.dubois@example.com;Gran Via 171;5867;Parijs;Frankrijk;Error: First name cannot be null, empty or whitespace (Parameter 'FirstName')
+80;Sophie;Jansen;sophie.jansen@example.com;Via Roma 122;3753;Amsterdam;Nederland;Error: Duplicate email
+82;Liam;Garcia;liam.garcia@example.com;Baker Street 141;3898;Rome;Italië;Error: Duplicate email
+83;Julia;Peeters;julia.peeters@example.com;Baker Street 182;5479;Dublin;Ierland;Error: Duplicate email
+84;Julia;Schmidt;julia.schmidt@example.com;Hoofdweg 155;6234;Moskou;Rusland;Error: Duplicate email
+85;Noah;Ivanov;noah.ivanov@example.com;Dorpsstraat 10;1058;Brussel;België;Error: Duplicate email
+86;Liam;Garcia;liam.garcia@example.com;Gran Via 91;9592;Warschau;;Error: Duplicate email
+87;Mila;Rossi;mila.rossi@example.com;Ulica Marszałkowska 115;9737;Rome;;Error: Duplicate email
+88;Anna;Ivanov;anna.ivanov@example.com;;Ulica Marszałkowska 190;7027;Amsterdam;Nederland;Error: Duplicate email
+90;Mila;Schmidt;mila.schmidt@example.com;Rue de la Paix 57;6714;Madrid;Spanje;Error: Duplicate email
+91;Julia;Schmidt;julia.schmidt@example.com;Ulica Marszałkowska 66;5825;Parijs;Frankrijk;Error: Duplicate email
+92;Noah;Schmidt;noah.schmidt@example.com;Gran Via;9899;Dublin;Ierland;Error: Duplicate email
+94;Anna;Murphy;anna.murphy@example.com;Baker Street 61;9951;Amsterdam;Nederland;Error: Duplicate email
+96;Emma;Dubois;emma.dubois@example.com;Tverskaya 175;1239;Madrid;Spanje;Error: Duplicate email
+97;Mila;;mila.jansen@example.com;Gran Via 176;6648;Amsterdam;Nederland;Error: Duplicate email
+98;Mila;Jansen;mila.jansen@example.com;Via Roma 7;1513;Brussel;België;Error: Duplicate email
+100;Anna;Murphy;anna.murphy@example.com;Gran Via 44;1526;Krakau;Polen;Error: Duplicate email
+101;Sophie;Peeters;sophie.peeters@example.com;Hoofdweg 59;6620;Dublin;Ierland;Error: Duplicate email
+102;Sophie;Peeters;sophie.peeters@example.com;Dorpsstraat 63;3601;Amsterdam;Nederland;Error: Duplicate email
+103;Liam;Garcia;liam.garcia@example.com;Gran Via 152;1970;Krakau;Polen;Error: Duplicate email
+105;Noah;Murphy;noah.murphy@example.com;Rue de la Paix 175;2928;Amsterdam;Nederland;Error: Duplicate email
+107;Sophie;Jansen;sophie.jansen@example.com;Gran Via 15;6939;Dublin;Ierland;Error: Duplicate email
+108;Anna;Peeters;anna.peeters@example.com;Tverskaya 114;-7522;Brussel;België;Error: Duplicate email
+109;Finn;Schmidt;finn.schmidt@example.com;Gran Via 60;6677;Moskou;Rusland;Error: Duplicate email
+110;Lucas;Peeters;lucas.peeters@example.com;Hoofdweg 108;5443;Warschau;Polen;Error: Duplicate email
+112;Anna;Dubois;anna.dubois@example.com;Dorpsstraat 49;4218;Rome;Italië;Error: Duplicate email
+113;Anna;Garcia;anna.garcia@example.com;Rue de la Paix 82;6622;Warschau;Polen;Error: Duplicate email
+114;Sophie;Peeters;sophie.peeters@example.com;Dorpsstraat 44;8299;Warschau;Polen;Error: Duplicate email
+115;Lucas;Jansen;lucas.jansen@example.com;Baker Street 198;6380;Berlijn;Duitsland;Error: Duplicate email
+117;Julia;Schmidt;julia.schmidt@example.com;Ulica Marszałkowska 78;6299;Brussel;België;Error: Duplicate email
+119;Emma;Dubois;emma.dubois@example.com;Ulica Marszałkowska 109;6047;Dublin;Ierland;Error: Duplicate email
+121;Mila;Rossi;mila.rossi@example.com;O'Connell Street 180;1186;Warschau;Polen;Error: Duplicate email
+123;Sophie;Kowalski;sophie.kowalski@example.com;Aleje Jerozolimskie 49;4554;Parijs;Frankrijk;Error: Duplicate email
+125;Mila;Ivanov;mila.ivanov@example.com;Ulica Marszałkowska 63;5340;Amsterdam;Nederland;Error: Duplicate email
+126;Sophie;Rossi;sophie.rossi@example.com;Aleje Jerozolimskie 120;3130;Brussel;België;Error: Duplicate email
+127;Mila;Schmidt;mila.schmidt@example.com;Tverskaya 197;6014;Madrid;Spanje;Error: Duplicate email
+129;Sophie;Dubois;sophie.dubois@example.com;Rue de la Paix 52;5284;Brussel;België;Error: Duplicate email
+131;Julia;Dubois;julia.dubois@example.com;Aleje Jerozolimskie 176;337;Berlijn;Duitsland;Error: Duplicate email
+137;Anna;Rossi;anna.rossi@example.com;Tverskaya 98;3194;Madrid;Spanje;Error: Duplicate email
+138;Sophie;Jansen;sophie.jansen@example.com;Dorpsstraat 36;9404;Krakau;Polen;Error: Duplicate email
+139;Max;Rossi;max.rossi@example.com;Via Roma 147;6586;Rome;Italië;Error: Duplicate email
+142;;Dubois;max.dubois@example.com;Gran Via 171;5867;Parijs;Frankrijk;Error: Duplicate email
+143;Anna;Kowalski;anna.kowalski@example.com;O'Connell Street 157;4130;Amsterdam;Nederland;Error: Duplicate email
+144;Noah;Jansen;noah.jansen@example.com;Aleje Jerozolimskie 123;6631;Madrid;Spanje;Error: Duplicate email
+145;Sophie;Kowalski;sophie.kowalski@example.com;O'Connell Street 142;1463;Berlijn;Duitsland;Error: Duplicate email
+146;Max;Garcia;max.garcia@example.com;Via Roma 197;6129;Parijs;Frankrijk;Error: Duplicate email
+147;Julia;Ivanov;julia.ivanov@example.com;Ulica Marszałkowska 63;9249;Rome;Italië;Error: Duplicate email
+148;Emma;Kowalski;emma.kowalski@example.com;Gran Via 120;1726;Rome;Italië;Error: Duplicate email
+150;Noah;Jansen;noah.jansen@example.com;Rue de la Paix 28;4269;Madrid;Spanje;Error: Duplicate email
+151;Sophie;Dubois;sophie.dubois@example.com;Via Roma 198;4822;Moskou;Rusland;Error: Duplicate email

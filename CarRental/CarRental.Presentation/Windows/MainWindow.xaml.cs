@@ -1,4 +1,6 @@
 ﻿using CarRental.Domain;
+using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +21,16 @@ namespace CarRental.Presentation.Windows {
     /// </summary>
     public partial class MainWindow : Window {
         private readonly DomainManager _domainManager;
+        private readonly List<CustomerDTO> _customers;
+        private IEnumerable<CustomerDTO> _linqQuery;
 
         public MainWindow(DomainManager domainManager) {
             InitializeComponent();
-
             _domainManager = domainManager;
 
-            loginListNames.ItemsSource = _domainManager.GetCustomers();
+            _customers = _domainManager.GetCustomers();
+            _linqQuery = _customers;
+            loginListNames.ItemsSource = _linqQuery;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -34,6 +39,19 @@ namespace CarRental.Presentation.Windows {
             } else {
                 placeholder.Opacity = 1;
             }
+
+            string filter = userInput.Text.Trim().ToLower();
+
+            _linqQuery = string.IsNullOrWhiteSpace(filter)
+                ? _customers
+                : _customers.Where(c => {
+                    var fullName = $"{c.FirstName} {c.LastName}".Trim();
+                    return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
+                });
+
+
+            loginListNames.ItemsSource = _linqQuery;
+
         }
     }
 }

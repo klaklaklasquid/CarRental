@@ -60,19 +60,17 @@ namespace CarRental.Persistence.Mapper {
                     string city = values[5].Trim();
                     string country = values[6].Trim();
 
-                    // check for duplicates
-                    string entry = $"{firstName};{lastName};{email};{street};{zipcode};{city};{country}";
-                    if (seenEntries.Contains(entry)) {
-                        errorLines.Add($"{lineNumber};{line};Error: Duplicate entry");
+                    // check for duplicates by email only
+                    if (seenEntries.Contains(email)) {
+                        errorLines.Add($"{lineNumber};{line};Error: Duplicate email");
                         lineNumber++;
                         continue;
                     }
-                    seenEntries.Add(entry);
+                    seenEntries.Add(email);
 
                     // make object and then insert into database
                     try {
                         Customer customer = new(firstName, lastName, email, street, zipcode, city, country);
-
 
                         // insert into database
                         using SqlCommand command =
