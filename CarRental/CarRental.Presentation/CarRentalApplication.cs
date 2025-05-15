@@ -10,7 +10,7 @@ namespace CarRental.Presentation {
         public CarRentalApplication(DomainManager domainManager) {
             _domainManager = domainManager;
 
-            _mainWindow = new MainWindow();
+            _mainWindow = new MainWindow(_domainManager);
             _mainWindow.Show();
         }
     }

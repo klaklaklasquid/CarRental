@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Model;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
@@ -104,6 +105,33 @@ namespace CarRental.Persistence.Mapper {
                     }
                     File.WriteAllLines(errorFilePath, errorLines);
                 }
+            }
+        }
+
+        public List<CustomerDTO> GetCustomers() {
+            try {
+                List<CustomerDTO> customers = new();
+                _connection.Open();
+
+                using SqlCommand command = new SqlCommand("SELECT * FROM Klanten", _connection);
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        string firstName = (string)reader["Voornaam"];
+                        string lastName = (string)reader["Achternaam"];
+                        string email = (string)reader["Email"];
+                        string street = (string)reader["Straat"];
+                        string zipcode = (string)reader["Postcode"];
+                        string city = (string)reader["Woonplaats"];
+                        string country = (string)reader["Land"];
+                        
+                        customers.Add(new CustomerDTO(firstName, lastName, email, street, zipcode, city, country));
+                    }
+                }
+                return customers;
+
+            } finally {
+                _connection.Close();
             }
         }
     }

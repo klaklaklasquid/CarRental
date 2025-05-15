@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Repository;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Repository;
 using Microsoft.Win32;
 
 
@@ -24,6 +25,10 @@ namespace CarRental.Domain {
             _establishmentRepository.InitData(establishmentCsv);
             _carRepository.InitData(carCsv);
             _customerRepository.InitData(customerCsv);
+        }
+
+        public List<CustomerDTO> GetCustomers() {
+            return _customerRepository.GetCustomers();
         }
     }
 }

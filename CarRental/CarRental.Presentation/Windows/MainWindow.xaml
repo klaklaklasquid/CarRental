@@ -5,8 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental.Presentation.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Login" Height="400" Width="250">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+
+        <!-- user input -->
+        <TextBox Text="" 
+                 Grid.Row="0"
+                 x:Name="userInput"
+                 VerticalAlignment="Center"
+                 FontSize="18"
+                 FontWeight="Light"
+                 Padding="10,0,0,0"
+                 Panel.ZIndex="1"
+                 Background="Transparent"
+                 TextChanged="TextBox_TextChanged"
+                 BorderThickness="0"/>
+        <TextBlock Text="Name"
+                   Grid.Row="0"
+                   x:Name="placeholder"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Light"
+                   Padding="10,0,0,0"
+                   Foreground="LightGray"
+                   Panel.ZIndex="0"
+                   Opacity="1"
+                   />
         
+        <!-- List view -->
+        <ListView x:Name="loginListNames"
+                  Grid.Row="1"/>
+        
+        <!-- login button -->
+        <Button x:Name="loginBtn"
+                Grid.Row="2"
+                Content="Login"
+                Background="#3087ED"
+                Foreground="#fff"
+                BorderThickness="0"/>
+
     </Grid>
 </Window>
