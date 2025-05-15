@@ -49,9 +49,7 @@ namespace CarRental.Presentation.Windows {
                     return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
                 });
 
-
             loginListNames.ItemsSource = _linqQuery;
-
         }
     }
 }
