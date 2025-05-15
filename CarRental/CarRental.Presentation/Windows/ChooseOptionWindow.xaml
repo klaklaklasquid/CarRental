@@ -1,0 +1,80 @@
+﻿<Window x:Class="CarRental.Presentation.Windows.ChooseOptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRental.Presentation.Windows"
+        mc:Ignorable="d"
+        Title="ChooseOptionWindow" Height="400" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- welcome message -->
+        <TextBlock Text="Welcome to Car Rental"
+                   Grid.Row="0"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Light"
+                   Padding="10,0,0,0"
+                   Opacity="1"/>
+
+        <!-- user display -->
+        <TextBlock Text=""
+                   Grid.Row="1"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Light"
+                   Padding="10,0,0,0"
+                   Opacity="1"
+                   x:Name="userName"/>
+
+        <!-- options -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!-- option for making a reservation -->
+            <Border Width="200"
+                    Height="50"
+                    Background="#3087ED"
+                    CornerRadius="10"
+                    Grid.Row="0">
+                <Button Content="Make a reservation"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="#fff"/>
+            </Border>
+
+            <!-- option for viewing the reservations -->
+            <Border Width="200"
+                    Height="50"
+                    Background="#3087ED"
+                    CornerRadius="10"
+                    Grid.Row="1">
+                <Button Content="View all reservations"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="#fff"/>
+            </Border>
+
+            <!-- option for viewing the cars -->
+            <Border Width="200"
+                    Height="50"
+                    Background="#3087ED"
+                    CornerRadius="10"
+                    Grid.Row="2">
+                <Button Content="view all cars"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="#fff"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
