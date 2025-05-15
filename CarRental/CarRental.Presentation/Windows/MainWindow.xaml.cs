@@ -1,6 +1,7 @@
 ﻿using CarRental.Domain;
 using CarRental.Domain.DTOs;
 using CarRental.Domain.Model;
+using CarRental.Domain.Sevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,15 @@ namespace CarRental.Presentation.Windows {
     /// </summary>
     public partial class MainWindow : Window {
         private readonly DomainManager _domainManager;
+        private readonly CarRentalApplication _application;
+
         private readonly List<CustomerDTO> _customers;
         private IEnumerable<CustomerDTO> _linqQuery;
 
-        public MainWindow(DomainManager domainManager) {
+        public MainWindow(CarRentalApplication application, DomainManager domainManager) {
             InitializeComponent();
             _domainManager = domainManager;
+            _application = application;
 
             _customers = _domainManager.GetCustomers();
             _linqQuery = _customers;
@@ -50,6 +54,10 @@ namespace CarRental.Presentation.Windows {
                 });
 
             loginListNames.ItemsSource = _linqQuery;
+        }
+
+        private void loginBtn_Click(object sender, RoutedEventArgs e) {
+            _application.ChangeWindow(this);
         }
     }
 }
