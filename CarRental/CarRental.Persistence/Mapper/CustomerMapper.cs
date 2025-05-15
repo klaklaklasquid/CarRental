@@ -76,13 +76,13 @@ namespace CarRental.Persistence.Mapper {
                         // insert into database
                         using SqlCommand command =
                             new("INSERT INTO Klanten (Voornaam, Achternaam, Email, Straat, Postcode, Woonplaats, Land) VALUES (@firstName, @lastName, @email, @street, @zipcode, @city, @country)", _connection);
-                        command.Parameters.AddWithValue("@firstName", firstName);
-                        command.Parameters.AddWithValue("@lastName", lastName);
-                        command.Parameters.AddWithValue("@email", email);
-                        command.Parameters.AddWithValue("@street", street);
-                        command.Parameters.AddWithValue("@zipcode", zipcode);
-                        command.Parameters.AddWithValue("@city", city);
-                        command.Parameters.AddWithValue("@country", country);
+                        command.Parameters.AddWithValue("@firstName", customer.FirstName);
+                        command.Parameters.AddWithValue("@lastName", customer.LastName);
+                        command.Parameters.AddWithValue("@email", customer.Email);
+                        command.Parameters.AddWithValue("@street", customer.Street);
+                        command.Parameters.AddWithValue("@zipcode", customer.Zipcode);
+                        command.Parameters.AddWithValue("@city", customer.City);
+                        command.Parameters.AddWithValue("@country", customer.Country);
                         command.ExecuteNonQuery();
 
                     } catch (Exception ex) {

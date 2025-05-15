@@ -73,6 +73,7 @@ namespace CarRental.Domain.Model {
                 if (!allowedEngineTypes.Contains(value)) {
                     throw new ArgumentException("Engine type must be either Diesel, Gasoline, Electric or Hybrid.", nameof(EngineType));
                 }
+                _engineType = value;
             }
         }
 

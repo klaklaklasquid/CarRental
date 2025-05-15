@@ -91,11 +91,11 @@ namespace CarRental.Persistence.Mapper {
                         //insert into database
                         using SqlCommand command =
                             new("INSERT INTO Autos (Nummerplaat, Model, Zitplaatsen, Motortype, Luchthaven_id) VALUES (@licensePlate, @brand, @seats, @engineType, @airportId)", _connection);
-                        command.Parameters.AddWithValue("@licensePlate", licensePlate);
-                        command.Parameters.AddWithValue("@brand", brand);
-                        command.Parameters.AddWithValue("@seats", seats);
-                        command.Parameters.AddWithValue("@engineType", engineType);
-                        command.Parameters.AddWithValue("@airportId", assignedAirportId);
+                        command.Parameters.AddWithValue("@licensePlate", car.LicencePlate);
+                        command.Parameters.AddWithValue("@brand", car.Brand);
+                        command.Parameters.AddWithValue("@seats", car.Seats);
+                        command.Parameters.AddWithValue("@engineType", car.EngineType);
+                        command.Parameters.AddWithValue("@airportId", car.AirportId);
                         command.ExecuteNonQuery();
                     } catch (Exception ex) {
                         errorLines.Add($"{lineNumber};{line};Error: {ex.Message}");
