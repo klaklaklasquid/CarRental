@@ -15,7 +15,7 @@ namespace CarRental.Presentation.Windows {
         }
 
         public void SetSelectedName(string name) {
-            userName.Text = name;
+            userName.Text = char.ToUpper(name[0]) + name.Substring(1);
         }
     }
 }
