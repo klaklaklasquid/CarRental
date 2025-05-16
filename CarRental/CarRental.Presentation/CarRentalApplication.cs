@@ -1,12 +1,11 @@
 
 using CarRental.Domain;
-using CarRental.Domain.Sevices;
+using CarRental.Domain.DTOs;
 using CarRental.Presentation.Windows;
 
 namespace CarRental.Presentation {
     public class CarRentalApplication {
         private readonly DomainManager _domainManager;
-        private readonly UserContext _context = new();
 
         private readonly MainWindow _mainWindow;
         private readonly ChooseOptionWindow _chooseOptionWindow;
@@ -20,8 +19,9 @@ namespace CarRental.Presentation {
             _mainWindow.Show();
         }
 
-        public void ChangeWindow(Object window) {
+        public void ChangeWindow(Object window, CustomerDTO ctr) {
             if (window is MainWindow) {
+                _chooseOptionWindow.SetSelectedName(ctr.FirstName);
                 _chooseOptionWindow.Show();
                 _mainWindow.Close();
             } else if (window is ChooseOptionWindow) {

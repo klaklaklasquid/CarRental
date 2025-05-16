@@ -40,6 +40,12 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 >
+                        <TextBlock Text="Establishment File: "
+                                   VerticalAlignment="Center"
+                                   FontSize="15"
+                                   Foreground="#3087ED"
+                                   />
+
                         <TextBox x:Name="FilePathEstablishment" 
                                  IsReadOnly="True" 
                                  Width="auto"
@@ -47,13 +53,12 @@
                                  VerticalAlignment="Center"
                                  TextWrapping="Wrap"
                                  TextChanged="FilledIn"
-                                 
                                  />
                         <Border CornerRadius="10"
                                 Background="#3087ED"
                                 Margin="10"
                                 >
-                            <Button Content="Browse... Establishments"
+                            <Button Content="Browse..."
                                     Background="Transparent"
                                     Padding="20,5"
                                     Foreground="white"
@@ -73,6 +78,12 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 >
+                        <TextBlock Text="Car File: "
+                                   VerticalAlignment="Center"
+                                   FontSize="15"
+                                   Foreground="#3087ED"
+                                   />
+
                         <TextBox x:Name="FilePathCar" 
                                  IsReadOnly="True" 
                                  Width="auto"
@@ -86,7 +97,7 @@
                                 Background="#3087ED"
                                 Margin="10"
                                 >
-                            <Button Content="Browse... Cars"
+                            <Button Content="Browse..."
                                     Background="Transparent"
                                     Padding="20,5"
                                     Foreground="white"
@@ -106,6 +117,12 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 >
+                        <TextBlock Text="Customer File: "
+                                   VerticalAlignment="Center"
+                                   FontSize="15"
+                                   Foreground="#3087ED"
+                                   />
+
                         <TextBox x:Name="FilePathCustomer" 
                                  IsReadOnly="True" 
                                  Width="auto"
@@ -118,7 +135,7 @@
                                 Background="#3087ED"
                                 Margin="10"
                                 >
-                            <Button Content="Browse... Customers"
+                            <Button Content="Browse..."
                                     Background="Transparent"
                                     Padding="20,5"
                                     Foreground="white"

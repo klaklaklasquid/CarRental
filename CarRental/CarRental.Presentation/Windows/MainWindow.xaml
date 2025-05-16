@@ -40,7 +40,8 @@
         
         <!-- List view -->
         <ListView x:Name="loginListNames"
-                  Grid.Row="1"/>
+                  Grid.Row="1"  
+                  />
         
         <!-- login button -->
         <Button x:Name="loginBtn"
