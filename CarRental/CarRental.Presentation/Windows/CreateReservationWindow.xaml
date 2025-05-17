@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental.Presentation.Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="CreateReservationWindow" Height="450" Width="1200">
     <Grid>
@@ -28,7 +29,8 @@
 
         <ListView x:Name="establishmentsListName"
                   Grid.Row="2"
-                  Grid.Column="0" SelectionChanged="HandleChangeList"/>
+                  Grid.Column="0" 
+                  SelectionChanged="HandleChangeList"/>
 
         <!-- listview for cars -->
         <TextBlock Text="Cars"
@@ -38,10 +40,64 @@
                    HorizontalAlignment="Center"
                    FontSize="24"
                    FontWeight="Light"/>
+        <Grid Grid.Column="1"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Number of seats:" 
+                       Grid.Column="0" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       FontWeight="Light"/>
+
+            <CheckBox IsChecked="False" 
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      x:Name="checkboxForSeat"
+                      HorizontalAlignment="Center"
+                      Checked="checkboxForSeat_Checked"
+                      Unchecked="checkboxForSeat_Unchecked"/>
+
+            <StackPanel Grid.Column="2"
+                        VerticalAlignment="Center"
+                        IsHitTestVisible="True"
+                        Focusable="True"
+                        x:Name="stackpanelForSlider"
+                        Opacity="0.3"
+                        >
+                <Slider x:Name="valueSlider" 
+                        Minimum="2" 
+                        Maximum="10" 
+                        TickFrequency="1" 
+                        IsSnapToTickEnabled="True"
+                        Value="2"
+                       ValueChanged="valueSlider_ValueChanged"/>
+                <TextBlock Text="{Binding ElementName=valueSlider, Path=Value, Mode=OneWay}" />
+            </StackPanel>
+
+        </Grid>
 
         <ListView x:Name="carsListName"
                   Grid.Row="2"
-                  Grid.Column="1"/>
+                  Grid.Column="1"
+                  SelectionChanged="HandleChangeCarList"
+                  Opacity="1"/>
+
+        <TextBlock Text="there are no cars avaible with this seat ammount"
+                   FontSize="20"
+                   FontWeight="Light"
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   Margin="50,0,50,0"
+                   VerticalAlignment="Center"
+                   Opacity="0"
+                   x:Name="carListError"
+                   />
 
         <!-- reservation details -->
         <TextBlock Text="Reservation"
@@ -77,21 +133,22 @@
                            FontSize="20"
                            FontWeight="Light"
                            Margin="0,10,0,0"/>
-                <TextBlock Text="Placeholder for details Airport"
+                <TextBlock Text=""
                            FontSize="20"
                            FontWeight="Light"
-                           x:Name="placeholderForAirport"/>
+                           x:Name="placeholderForAirport"
+                           />
 
                 <!-- Car information -->
                 <TextBlock Text="Car:"
                            FontSize="20"
                            FontWeight="Light"
                            Margin="0,10,0,0"/>
-                <TextBlock Text="Placeholder for car info"
+                <TextBlock Text=""
                            FontSize="20"
                            FontWeight="Light"
                            x:Name="placeholderForCar"/>
-                
+
                 <!-- Date info -->
                 <TextBlock Text="Date:"
                            FontSize="20"

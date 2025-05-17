@@ -124,7 +124,7 @@ namespace CarRental.Persistence.Mapper {
             try {
                 List<CarDTO> cars = new();
                 _connection.Open();
-                using SqlCommand command = new($"SELECT * FROM Autos WHERE luchthaven_id = {id}", _connection);
+                using SqlCommand command = new($"SELECT * FROM Autos WHERE Luchthaven_id = {id}", _connection);
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows) {
                     while (reader.Read()) {
