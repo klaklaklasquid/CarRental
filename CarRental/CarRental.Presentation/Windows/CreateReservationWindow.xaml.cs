@@ -33,6 +33,13 @@ namespace CarRental.Presentation.Windows {
         private void HandleChangeList(object sender, SelectionChangedEventArgs e) {
             _airportId = ((EstablishmentDTO)establishmentsListName.SelectedItem).Id;
             carsListName.ItemsSource = _application.GetCarByAirportId(_airportId);
+
+            if (!carsListName.HasItems) {
+                carListError.Opacity = 1;
+            } else {
+                carListError.Opacity = 0;
+            }
+
             if (establishmentsListName.SelectedItem != null) {
                 placeholderForAirport.Text = ((EstablishmentDTO)establishmentsListName.SelectedItem).Airport;
                 placeholderForCar.Text = string.Empty;
@@ -40,8 +47,10 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
-            if(!carsListName.HasItems) {
+            if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
+            } else {
+                carListError.Opacity = 0;
             }
 
             if (carsListName.SelectedItem != null) {
@@ -56,17 +65,32 @@ namespace CarRental.Presentation.Windows {
         private void valueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             _seats = (int)valueSlider.Value;
             if (establishmentsListName.SelectedItem != null) {
-                carsListName.ItemsSource = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
+                var filteredCars = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
+                carsListName.ItemsSource = filteredCars;
+
+                if (!carsListName.HasItems) {
+                    carListError.Opacity = 1;
+                } else {
+                    carListError.Opacity = 0;
+                }
             }
         }
 
         private void checkboxForSeat_Checked(object sender, RoutedEventArgs e) {
             _isChecked = true;
-            if(establishmentsListName.SelectedItem != null && _isChecked) {
+            if (establishmentsListName.SelectedItem != null && _isChecked) {
                 stackpanelForSlider.Focusable = true;
                 stackpanelForSlider.IsHitTestVisible = true;
                 stackpanelForSlider.Opacity = 1;
-                carsListName.ItemsSource = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
+
+                var filteredCars = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
+                carsListName.ItemsSource = filteredCars;
+
+                if (!carsListName.HasItems) {
+                    carListError.Opacity = 1;
+                } else {
+                    carListError.Opacity = 0;
+                }
             }
         }
 
@@ -74,9 +98,16 @@ namespace CarRental.Presentation.Windows {
             _isChecked = false;
             if (establishmentsListName.SelectedItem != null && !_isChecked) {
                 stackpanelForSlider.Focusable = false;
-                stackpanelForSlider.IsHitTestVisible= false;
+                stackpanelForSlider.IsHitTestVisible = false;
                 stackpanelForSlider.Opacity = 0.3;
+
                 carsListName.ItemsSource = _application.GetCarByAirportId(_airportId);
+
+                if (!carsListName.HasItems) {
+                    carListError.Opacity = 1;
+                } else {
+                    carListError.Opacity = 0;
+                }
             }
         }
     }

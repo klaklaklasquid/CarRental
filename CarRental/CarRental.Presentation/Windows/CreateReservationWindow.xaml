@@ -86,9 +86,10 @@
                   Grid.Row="2"
                   Grid.Column="1"
                   SelectionChanged="HandleChangeCarList"
+                  
                   Opacity="1"/>
 
-        <TextBlock Text="there are no cars avaible with this seat ammount"
+        <TextBlock Text="No cars found, try adjusting the filter or disable it"
                    FontSize="20"
                    FontWeight="Light"
                    Grid.Column="1"
@@ -97,6 +98,7 @@
                    VerticalAlignment="Center"
                    Opacity="0"
                    x:Name="carListError"
+                   TextWrapping="Wrap"
                    />
 
         <!-- reservation details -->
