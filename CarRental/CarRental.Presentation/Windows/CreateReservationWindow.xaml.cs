@@ -31,5 +31,15 @@ namespace CarRental.Presentation.Windows {
             int airportId = ((EstablishmentDTO)establishmentsListName.SelectedItem).Id;
             carsListName.ItemsSource = _application.GetCarByAirportId(airportId);
         }
+
+        public void SetPlaceholderName(string placeholderName) {
+            placeholderForName.Text = placeholderName;
+        }
+
+        public void SetPlaceholderAirport(string placeholderAirport) {
+            placeholderForAirport.Text = placeholderAirport;
+        }
+
+        //public void 
     }
 }

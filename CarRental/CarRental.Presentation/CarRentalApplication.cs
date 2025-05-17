@@ -12,6 +12,8 @@ namespace CarRental.Presentation {
         private readonly ChooseOptionWindow _chooseOptionWindow;
         private readonly CreateReservationWindow _createReservationWindow;
 
+        public string UserName { get; set; }
+
         private Dictionary<string, Window> _windowsByTag;
 
         public CarRentalApplication(DomainManager domainManager) {
@@ -38,6 +40,7 @@ namespace CarRental.Presentation {
         }
 
         internal void OpenWindow1() {
+            _createReservationWindow.SetPlaceholderName(UserName);
             _createReservationWindow.Show();
         }
 
@@ -51,7 +54,8 @@ namespace CarRental.Presentation {
 
         public void ChangeWindow(Object window, CustomerDTO ctr) {
             if (window is MainWindow) {
-                _chooseOptionWindow.SetSelectedName(ctr.FirstName);
+                UserName = ctr.FirstName;
+                _chooseOptionWindow.SetSelectedName(UserName);
                 _chooseOptionWindow.Show();
                 _mainWindow.Close();
             }
