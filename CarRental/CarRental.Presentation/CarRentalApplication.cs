@@ -17,6 +17,7 @@ namespace CarRental.Presentation {
         private Dictionary<string, Window> _windowsByTag;
 
         public CarRentalApplication(DomainManager domainManager) {
+            UserName = string.Empty;
             _domainManager = domainManager;
 
             _mainWindow = new MainWindow(this, _domainManager);
@@ -33,15 +34,11 @@ namespace CarRental.Presentation {
         }
 
         private void OpenWindows(object? sender, string e) {
-            _windowsByTag.TryGetValue(e, out Window window);
+            _windowsByTag.TryGetValue(e, out Window? window);
             if (window != null) {
+                _createReservationWindow.SetPlaceholderName(UserName);
                 window.Show();
             }
-        }
-
-        internal void OpenWindow1() {
-            _createReservationWindow.SetPlaceholderName(UserName);
-            _createReservationWindow.Show();
         }
 
         public List<EstablishmentDTO> GetEstablishments() {

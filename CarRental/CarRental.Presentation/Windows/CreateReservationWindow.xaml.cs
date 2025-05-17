@@ -40,6 +40,5 @@ namespace CarRental.Presentation.Windows {
             placeholderForAirport.Text = placeholderAirport;
         }
 
-        //public void 
     }
 }
