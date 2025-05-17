@@ -2,16 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarRental.Presentation.Windows {
     /// <summary>
@@ -28,29 +20,50 @@ namespace CarRental.Presentation.Windows {
             _application = application;
 
             establishmentsListName.ItemsSource = _application.GetEstablishments();
+
+            stackpanelForSlider.Focusable = false;
+            stackpanelForSlider.IsHitTestVisible = false;
+            stackpanelForSlider.Opacity = 0.3;
         }
 
         private void HandleChangeList(object sender, SelectionChangedEventArgs e) {
+            if (establishmentsListName.SelectedItem == null)
+                return;
+
             _airportId = ((EstablishmentDTO)establishmentsListName.SelectedItem).Id;
-            carsListName.ItemsSource = _application.GetCarByAirportId(_airportId);
+
+            IEnumerable<CarDTO> cars;
+
+            if (_isChecked) {
+                cars = _application.GetCarByAirportId(_airportId).Where(car => car.Seats == _seats);
+            } else {
+                cars = _application.GetCarByAirportId(_airportId);
+            }
+
+            carsListName.ItemsSource = cars;
 
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
+                carListError.Text = _isChecked
+                    ? $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie."
+                    : "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
             } else {
                 carListError.Opacity = 0;
+                carListError.Text = "";
             }
 
-            if (establishmentsListName.SelectedItem != null) {
-                placeholderForAirport.Text = ((EstablishmentDTO)establishmentsListName.SelectedItem).Airport;
-                placeholderForCar.Text = string.Empty;
-            }
+            placeholderForAirport.Text = ((EstablishmentDTO)establishmentsListName.SelectedItem).Airport;
+            placeholderForCar.Text = string.Empty;
         }
+
 
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
+                carListError.Text = "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
             } else {
                 carListError.Opacity = 0;
+                carListError.Text = "";
             }
 
             if (carsListName.SelectedItem != null) {
@@ -64,50 +77,57 @@ namespace CarRental.Presentation.Windows {
 
         private void valueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             _seats = (int)valueSlider.Value;
+
             if (establishmentsListName.SelectedItem != null) {
-                var filteredCars = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
+                var filteredCars = _application
+                    .GetCarByAirportId(_airportId)
+                    .Where(car => car.Seats == _seats);
+
                 carsListName.ItemsSource = filteredCars;
 
                 if (!carsListName.HasItems) {
                     carListError.Opacity = 1;
+                    carListError.Text = $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie.";
                 } else {
                     carListError.Opacity = 0;
+                    carListError.Text = "";
                 }
             }
         }
 
         private void checkboxForSeat_Checked(object sender, RoutedEventArgs e) {
             _isChecked = true;
-            if (establishmentsListName.SelectedItem != null && _isChecked) {
-                stackpanelForSlider.Focusable = true;
-                stackpanelForSlider.IsHitTestVisible = true;
-                stackpanelForSlider.Opacity = 1;
-
-                var filteredCars = _application.GetCarByAirportId(_airportId).Where(airport => airport.Seats == _seats);
-                carsListName.ItemsSource = filteredCars;
-
-                if (!carsListName.HasItems) {
-                    carListError.Opacity = 1;
-                } else {
-                    carListError.Opacity = 0;
-                }
-            }
+            HandleCarList(_isChecked);
         }
 
         private void checkboxForSeat_Unchecked(object sender, RoutedEventArgs e) {
             _isChecked = false;
-            if (establishmentsListName.SelectedItem != null && !_isChecked) {
-                stackpanelForSlider.Focusable = false;
-                stackpanelForSlider.IsHitTestVisible = false;
-                stackpanelForSlider.Opacity = 0.3;
+            HandleCarList(_isChecked);
+        }
 
-                carsListName.ItemsSource = _application.GetCarByAirportId(_airportId);
+        private void HandleCarList(bool isChecked) {
+            if (establishmentsListName.SelectedItem == null)
+                return;
 
-                if (!carsListName.HasItems) {
-                    carListError.Opacity = 1;
-                } else {
-                    carListError.Opacity = 0;
-                }
+            stackpanelForSlider.Focusable = isChecked;
+            stackpanelForSlider.IsHitTestVisible = isChecked;
+            valueSlider.IsEnabled = isChecked;
+            stackpanelForSlider.Opacity = isChecked ? 1 : 0.3;
+
+            IEnumerable<CarDTO> cars = isChecked
+                ? _application.GetCarByAirportId(_airportId).Where(c => c.Seats == _seats)
+                : _application.GetCarByAirportId(_airportId);
+
+            carsListName.ItemsSource = cars;
+
+            if (!carsListName.HasItems) {
+                carListError.Opacity = 1;
+                carListError.Text = isChecked
+                    ? $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie."
+                    : "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
+            } else {
+                carListError.Opacity = 0;
+                carListError.Text = "";
             }
         }
     }
