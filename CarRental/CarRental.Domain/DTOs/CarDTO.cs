@@ -23,7 +23,7 @@ namespace CarRental.Domain.DTOs {
         }
 
         public override string? ToString() {
-            return $"{Brand}";
+            return $"Model: {Brand}\nLicense plate: {LicensePlate}\nSeats: {Seats}\nEngine type: {EngineType}";
         }
     }
 }

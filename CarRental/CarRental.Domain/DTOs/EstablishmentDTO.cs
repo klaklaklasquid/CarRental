@@ -23,7 +23,7 @@ namespace CarRental.Domain.DTOs {
         }
 
         public override string? ToString() {
-            return $"{Airport}";
+            return $"{Airport}\nAddres: {Street}, {Zipcode}, {City}, {Country}";
         }
     }
 }
