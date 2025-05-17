@@ -19,8 +19,29 @@
         </Grid.ColumnDefinitions>
         
         <!-- listview for establishments -->
+        <TextBlock Text="Establishments"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Light"/>
+
         <ListView x:Name="establishmentsListName"
                   Grid.Row="2"
-                  Grid.Column="0"/>
+                  Grid.Column="0" SelectionChanged="HandleChangeList"/>
+        
+        <!-- listview for cars -->
+        <TextBlock Text="Cars"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Light"/>
+
+        <ListView x:Name="carsListName"
+                  Grid.Row="2"
+                  Grid.Column="1"/>
     </Grid>
 </Window>

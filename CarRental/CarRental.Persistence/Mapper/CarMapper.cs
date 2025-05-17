@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Model;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
@@ -116,6 +117,30 @@ namespace CarRental.Persistence.Mapper {
                     }
                     File.WriteAllLines(errorFilePath, errorLines);
                 }
+            }
+        }
+
+        public List<CarDTO> GetCarByAirportId(int id) {
+            try {
+                List<CarDTO> cars = new();
+                _connection.Open();
+                using SqlCommand command = new($"SELECT * FROM Autos WHERE luchthaven_id = {id}", _connection);
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        int carId = (int)reader["Id"];
+                        string licensePlate = (string)reader["Nummerplaat"];
+                        string brand = (string)reader["Model"];
+                        int seats = (int)reader["Zitplaatsen"];
+                        string EngineType = (string)reader["Motortype"];
+                        int airportId = (int)reader["Luchthaven_id"];
+
+                        cars.Add(new CarDTO(carId, licensePlate, brand, seats, EngineType, airportId));
+                    }
+                }
+                return cars;
+            } finally {
+                _connection.Close();
             }
         }
     }

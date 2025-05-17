@@ -45,6 +45,10 @@ namespace CarRental.Presentation {
             return _domainManager.GetEstablishments();
         }
 
+        public List<CarDTO> GetCarByAirportId(int id) {
+            return _domainManager.GetCarByAirportId(id);
+        }
+
         public void ChangeWindow(Object window, CustomerDTO ctr) {
             if (window is MainWindow) {
                 _chooseOptionWindow.SetSelectedName(ctr.FirstName);

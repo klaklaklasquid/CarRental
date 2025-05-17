@@ -34,5 +34,9 @@ namespace CarRental.Domain {
         public List<EstablishmentDTO> GetEstablishments() {
             return _establishmentRepository.GetEstablishments();
         }
+
+        public List<CarDTO> GetCarByAirportId(int id) {
+            return _carRepository.GetCarByAirportId(id);
+        }
     }
 }

@@ -111,13 +111,14 @@ namespace CarRental.Persistence.Mapper {
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows) {
                     while (reader.Read()) {
+                        int id = (int)reader["Id"];
                         string airport = (string)reader["Luchthaven"];
                         string street = (string)reader["Straat"];
                         string zipcode = (string)reader["Postcode"];
                         string city = (string)reader["Plaats"];
                         string country = (string)reader["Land"];
 
-                        establishments.Add(new EstablishmentDTO(airport, street, zipcode, city, country));
+                        establishments.Add(new EstablishmentDTO(id, airport, street, zipcode, city, country));
                     }
                 }
                 return establishments;

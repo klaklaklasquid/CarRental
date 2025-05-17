@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,11 @@ namespace CarRental.Presentation.Windows {
             _application = application;
 
             establishmentsListName.ItemsSource = _application.GetEstablishments();
+        }
+
+        private void HandleChangeList(object sender, SelectionChangedEventArgs e) {
+            int airportId = ((EstablishmentDTO)establishmentsListName.SelectedItem).Id;
+            carsListName.ItemsSource = _application.GetCarByAirportId(airportId);
         }
     }
 }
