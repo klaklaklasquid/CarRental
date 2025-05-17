@@ -103,7 +103,27 @@ namespace CarRental.Persistence.Mapper {
         }
 
         public List<EstablishmentDTO> GetEstablishments() {
-            try { }
+            try {
+                List<EstablishmentDTO> establishments = new();
+                _connection.Open();
+
+                using SqlCommand command = new SqlCommand("SELECT * FROM Vestigingen", _connection);
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        string airport = (string)reader["Luchthaven"];
+                        string street = (string)reader["Straat"];
+                        string zipcode = (string)reader["Postcode"];
+                        string city = (string)reader["Plaats"];
+                        string country = (string)reader["Land"];
+
+                        establishments.Add(new EstablishmentDTO(airport, street, zipcode, city, country));
+                    }
+                }
+                return establishments;
+            } finally {
+                _connection.Close();
+            }
         }
     }
 }

@@ -50,7 +50,9 @@
                 <Button Content="Make a reservation"
                         Background="Transparent"
                         BorderThickness="0"
-                        Foreground="#fff"/>
+                        Foreground="#fff"
+                        Tag="1"
+                        Click="Button_Click"/>
             </Border>
 
             <!-- option for viewing the reservations -->
@@ -62,7 +64,9 @@
                 <Button Content="View all reservations"
                         Background="Transparent"
                         BorderThickness="0"
-                        Foreground="#fff"/>
+                        Foreground="#fff"
+                        Tag="2"
+                        Click="Button_Click"/>
             </Border>
 
             <!-- option for viewing the cars -->
@@ -74,7 +78,9 @@
                 <Button Content="view all cars"
                         Background="Transparent"
                         BorderThickness="0"
-                        Foreground="#fff"/>
+                        Foreground="#fff"
+                        Tag="3"
+                        Click="Button_Click"/>
             </Border>
         </Grid>
     </Grid>

@@ -1,21 +1,32 @@
 ﻿using CarRental.Domain;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CarRental.Presentation.Windows {
     /// <summary>
     /// Interaction logic for ChooseOptionWindow.xaml
     /// </summary>
     public partial class ChooseOptionWindow : Window {
-        private readonly DomainManager _domainManager;
+        internal event EventHandler<string> OpenWindowRequested;
 
-        public ChooseOptionWindow(DomainManager domainManager) {
+        private readonly DomainManager _domainManager;
+        private readonly CarRentalApplication _application;
+
+        public ChooseOptionWindow(CarRentalApplication application ,DomainManager domainManager) {
             InitializeComponent();
 
             _domainManager = domainManager;
+            _application = application;
         }
 
         public void SetSelectedName(string name) {
             userName.Text = char.ToUpper(name[0]) + name.Substring(1);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            if(sender is Button button) {
+                OpenWindowRequested.Invoke(this, button.Tag.ToString());
+            }
         }
     }
 }
