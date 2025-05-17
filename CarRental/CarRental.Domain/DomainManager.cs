@@ -30,5 +30,9 @@ namespace CarRental.Domain {
         public List<CustomerDTO> GetCustomers() {
             return _customerRepository.GetCustomers();
         }
+
+        public List<EstablishmentDTO> GetEstablishments() {
+            return _establishmentRepository.GetEstablishments();
+        }
     }
 }

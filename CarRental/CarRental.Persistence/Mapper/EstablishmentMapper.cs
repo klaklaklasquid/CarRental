@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Model;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
@@ -99,6 +100,10 @@ namespace CarRental.Persistence.Mapper {
                     File.WriteAllLines(errorFilePath, errorLines);
                 }
             }
+        }
+
+        public List<EstablishmentDTO> GetEstablishments() {
+            try { }
         }
     }
 }

@@ -9,14 +9,20 @@ namespace CarRental.Presentation {
 
         private readonly MainWindow _mainWindow;
         private readonly ChooseOptionWindow _chooseOptionWindow;
+        private readonly CreateReservationWindow _createReservationWindow;
 
         public CarRentalApplication(DomainManager domainManager) {
             _domainManager = domainManager;
 
             _mainWindow = new MainWindow(this, _domainManager);
             _chooseOptionWindow = new ChooseOptionWindow(_domainManager);
+            _createReservationWindow = new CreateReservationWindow(this);
 
             _mainWindow.Show();
+        }
+
+        public List<EstablishmentDTO> GetEstablishments() {
+            return _domainManager.GetEstablishments();
         }
 
         public void ChangeWindow(Object window, CustomerDTO ctr) {
