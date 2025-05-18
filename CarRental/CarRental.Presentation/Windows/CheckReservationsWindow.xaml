@@ -1,0 +1,68 @@
+﻿<Window x:Class="CarRental.Presentation.Windows.CheckReservationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRental.Presentation.Windows"
+        mc:Ignorable="d"
+        Title="CheckReservationsWindow" Height="450" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Reservation list"
+                   FontSize="24"
+                   FontWeight="Light"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+            <!-- filters -->
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Search on name"
+                       FontSize="20"
+                       FontWeight="Light" HorizontalAlignment="Center"/>
+
+                <TextBox x:Name="searchName"
+                         FontSize="20"
+                         FontWeight="Light"
+                         TextAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="Search on date"
+                           FontSize="20"
+                           FontWeight="Light"
+                           HorizontalAlignment="Center"/>
+                <DatePicker x:Name="searchDate"
+                            FontSize="20"
+                            FontWeight="Light"
+                            HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <TextBlock Text="Search on establishment"
+                           FontSize="20"
+                           FontWeight="Light"
+                           HorizontalAlignment="Center"/>
+
+                <ListView x:Name="establishmentList"
+                          />
+            </StackPanel>
+        </Grid>
+
+        <!-- ListView of reservations -->
+        <ListView x:Name="reservationList"
+                  Grid.Column="1"/>
+    </Grid>
+</Window>
