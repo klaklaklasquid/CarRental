@@ -46,8 +46,8 @@ namespace CarRental.Presentation.Windows {
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
                 carListError.Text = _isChecked
-                    ? $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie."
-                    : "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
+                    ? $"There are no cars with {_seats} seats available at this location."
+                    : "There are currently no cars available at this location.";
             } else {
                 carListError.Opacity = 0;
                 carListError.Text = "";
@@ -60,7 +60,7 @@ namespace CarRental.Presentation.Windows {
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
-                carListError.Text = "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
+                carListError.Text = "There are currently no cars available at this location.";
             } else {
                 carListError.Opacity = 0;
                 carListError.Text = "";
@@ -88,7 +88,7 @@ namespace CarRental.Presentation.Windows {
 
                 if (!carsListName.HasItems) {
                     carListError.Opacity = 1;
-                    carListError.Text = $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie.";
+                    carListError.Text = $"There are no cars with {_seats} seats available at this location.";
                 } else {
                     carListError.Opacity = 0;
                     carListError.Text = "";
@@ -124,8 +124,8 @@ namespace CarRental.Presentation.Windows {
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
                 carListError.Text = isChecked
-                    ? $"Er zijn geen auto's met {_seats} zitplaatsen op deze locatie."
-                    : "Er zijn momenteel geen auto's beschikbaar op deze locatie.";
+                    ? $"There are no cars with {_seats} seats available at this location."
+                    : "There are currently no cars available at this location.";
             } else {
                 carListError.Opacity = 0;
                 carListError.Text = "";
@@ -154,11 +154,28 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            _application.SetReservation(new ReservationDTO(
-                _user.Email,
-                startDatePicker.SelectedDate.Value,
-                endDatePicker.SelectedDate.Value,
-                ((CarDTO)carsListName.SelectedItem).LicensePlate));
+            if (startDatePicker.SelectedDate.HasValue &&
+                endDatePicker.SelectedDate.HasValue &&
+                carsListName.SelectedItem is CarDTO &&
+                establishmentsListName.SelectedItem is EstablishmentDTO) {
+                _application.SetReservation(new ReservationDTO(
+                    _user.Email,
+                    startDatePicker.SelectedDate.Value,
+                    endDatePicker.SelectedDate.Value,
+                    ((CarDTO)carsListName.SelectedItem).LicensePlate));
+                this.Hide();
+                establishmentsListName.SelectedItem = null;
+                carsListName.SelectedItem = null;
+                startDatePicker.SelectedDate = null;
+                endDatePicker.SelectedDate = null;
+            } else {
+                MessageBox.Show(
+                    "Please make sure you have selected a start date, an end date, and a car before making a reservation.",
+                    "Incomplete Reservation",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
         }
     }
 }
