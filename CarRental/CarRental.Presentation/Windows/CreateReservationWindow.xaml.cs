@@ -56,7 +56,6 @@ namespace CarRental.Presentation.Windows {
             placeholderForCar.Text = string.Empty;
         }
 
-
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
@@ -129,6 +128,27 @@ namespace CarRental.Presentation.Windows {
                 carListError.Opacity = 0;
                 carListError.Text = "";
             }
+        }
+
+        private void startDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
+            if (startDatePicker.SelectedDate.HasValue) {
+                DateTime nextDay = startDatePicker.SelectedDate.Value.AddDays(1);
+                endDatePicker.DisplayDateStart = nextDay;
+                placeholderStartDate.Text = startDatePicker.SelectedDate.Value.ToString("dd/MM/yyyy");
+
+                if (endDatePicker.SelectedDate < nextDay) {
+                    endDatePicker.SelectedDate = null;
+                    placeholderForName.Text = "";
+                }
+            } else {
+                endDatePicker.DisplayDateStart = null;
+            }
+        }
+
+        private void endDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
+            placeholderEndDate.Text = endDatePicker.SelectedDate.HasValue
+                ? endDatePicker.SelectedDate.Value.ToString("dd/MM/yyyy")
+                : string.Empty;
         }
     }
 }
