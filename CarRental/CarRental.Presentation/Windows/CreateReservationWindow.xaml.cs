@@ -14,6 +14,7 @@ namespace CarRental.Presentation.Windows {
         private int _airportId;
         private int _seats = 2;
         private bool _isChecked = false;
+        private CustomerDTO _user;
 
         public CreateReservationWindow(CarRentalApplication application) {
             InitializeComponent();
@@ -70,8 +71,9 @@ namespace CarRental.Presentation.Windows {
             }
         }
 
-        public void SetPlaceholderName(string placeholderName) {
-            placeholderForName.Text = placeholderName;
+        public void GetCustomer(CustomerDTO user) {
+            _user = user;
+            placeholderForName.Text = _user.FirstName;
         }
 
         private void valueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -149,6 +151,14 @@ namespace CarRental.Presentation.Windows {
             placeholderEndDate.Text = endDatePicker.SelectedDate.HasValue
                 ? endDatePicker.SelectedDate.Value.ToString("dd/MM/yyyy")
                 : string.Empty;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            _application.SetReservation(new ReservationDTO(
+                _user.Email,
+                startDatePicker.SelectedDate.Value,
+                endDatePicker.SelectedDate.Value,
+                ((CarDTO)carsListName.SelectedItem).LicensePlate));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CarRental.Domain;
+using CarRental.Domain.DTOs;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +20,8 @@ namespace CarRental.Presentation.Windows {
             _application = application;
         }
 
-        public void SetSelectedName(string name) {
+        public void GetCustomer(CustomerDTO user) {
+            string name = user.FirstName;
             userName.Text = char.ToUpper(name[0]) + name.Substring(1);
         }
 

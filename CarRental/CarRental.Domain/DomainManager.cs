@@ -1,4 +1,5 @@
 ﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Win32;
 
@@ -8,17 +9,20 @@ namespace CarRental.Domain {
         private readonly ICarRepository _carRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IEstablishmentRepository _establishmentRepository;
+        private readonly IReservationRepository _reservationRepository;
 
-        public DomainManager(ICarRepository carRepository, ICustomerRepository customerRepository, IEstablishmentRepository establishmentRepository) {
+        public DomainManager(ICarRepository carRepository, ICustomerRepository customerRepository, IEstablishmentRepository establishmentRepository, IReservationRepository reservationRepository) {
             _carRepository = carRepository;
             _customerRepository = customerRepository;
             _establishmentRepository = establishmentRepository;
+            _reservationRepository = reservationRepository;
         }
 
         public void WipeAll() {
             _establishmentRepository.WipeDatabase();
             _customerRepository.WipeDatabase();
             _carRepository.WipeDatabase();
+            _reservationRepository.WipeDatabase();
         }
 
         public void InitData(string establishmentCsv, string carCsv, string customerCsv) {
@@ -37,6 +41,16 @@ namespace CarRental.Domain {
 
         public List<CarDTO> GetCarByAirportId(int id) {
             return _carRepository.GetCarByAirportId(id);
+        }
+
+        public void SetReservation(ReservationDTO reservation) {
+
+            _reservationRepository.SetReservation(new Reservation(
+                reservation.CustomerEmail,
+                reservation.StartDate,
+                reservation.EndDate,
+                reservation.CarLicensePlate
+            ));
         }
     }
 }

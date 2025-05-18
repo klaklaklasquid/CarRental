@@ -17,9 +17,10 @@ public partial class App : Application {
         ICarRepository carRepository = new CarMapper();
         ICustomerRepository customerRepository = new CustomerMapper();
         IEstablishmentRepository establishmentRepository = new EstablishmentMapper();
+        IReservationRepository reservationRepository = new ReservationMapper();
 
         // domain layer
-        DomainManager domainManager = new(carRepository, customerRepository, establishmentRepository);
+        DomainManager domainManager = new(carRepository, customerRepository, establishmentRepository, reservationRepository);
 
         // presentation layer
         _ = new CarRentalApplication(domainManager);

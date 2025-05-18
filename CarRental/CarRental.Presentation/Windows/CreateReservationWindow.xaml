@@ -111,7 +111,7 @@
                    HorizontalAlignment="Center"
                    FontSize="24"
                    FontWeight="Light"/>
-        
+
         <!-- date pickers -->
         <Grid Grid.Row="1"
               Grid.Column="2">
@@ -128,7 +128,7 @@
                         x:Name="endDatePicker"
                         SelectedDateChanged="endDatePicker_SelectedDateChanged"/>
         </Grid>
-        
+
 
         <Grid Grid.Row="2"
               Grid.Column="2">
@@ -200,7 +200,8 @@
                         FontSize="24"
                         FontWeight="Light"
                         Foreground="#fff"
-                        BorderThickness="0"/>
+                        BorderThickness="0"
+                        Click="Button_Click"/>
             </Border>
         </Grid>
     </Grid>

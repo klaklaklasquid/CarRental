@@ -1,6 +1,7 @@
 
 using CarRental.Domain;
 using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Presentation.Windows;
 using System.Windows;
 
@@ -12,12 +13,11 @@ namespace CarRental.Presentation {
         private readonly ChooseOptionWindow _chooseOptionWindow;
         private readonly CreateReservationWindow _createReservationWindow;
 
-        public string UserName { get; set; }
+        public CustomerDTO User { get; set; }
 
         private Dictionary<string, Window> _windowsByTag;
 
         public CarRentalApplication(DomainManager domainManager) {
-            UserName = string.Empty;
             _domainManager = domainManager;
 
             _mainWindow = new MainWindow(this, _domainManager);
@@ -36,7 +36,7 @@ namespace CarRental.Presentation {
         private void OpenWindows(object? sender, string e) {
             _windowsByTag.TryGetValue(e, out Window? window);
             if (window != null) {
-                _createReservationWindow.SetPlaceholderName(UserName);
+                _createReservationWindow.GetCustomer(User);
                 window.Show();
             }
         }
@@ -49,10 +49,14 @@ namespace CarRental.Presentation {
             return _domainManager.GetCarByAirportId(id);
         }
 
+        public void SetReservation(ReservationDTO reservation) {
+            _domainManager.SetReservation(reservation);
+        }
+
         public void ChangeWindow(Object window, CustomerDTO ctr) {
             if (window is MainWindow) {
-                UserName = ctr.FirstName;
-                _chooseOptionWindow.SetSelectedName(UserName);
+                User = ctr;
+                _chooseOptionWindow.GetCustomer(User);
                 _chooseOptionWindow.Show();
                 _mainWindow.Close();
             }

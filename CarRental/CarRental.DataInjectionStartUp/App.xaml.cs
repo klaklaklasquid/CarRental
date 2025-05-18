@@ -17,12 +17,14 @@ public partial class App : Application {
         ICarRepository carRepository = new CarMapper();
         ICustomerRepository customerRepository = new CustomerMapper();
         IEstablishmentRepository establishmentRepository = new EstablishmentMapper();
+        IReservationRepository reservationRepository = new ReservationMapper();
 
         // domain layer
         DomainManager domainManager = new DomainManager(
             carRepository,
             customerRepository,
-            establishmentRepository
+            establishmentRepository,
+            reservationRepository
         );
 
         // presentation layer

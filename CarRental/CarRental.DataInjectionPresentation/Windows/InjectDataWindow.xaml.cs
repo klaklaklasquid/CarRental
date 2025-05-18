@@ -75,9 +75,5 @@ namespace CarRental.DataInjectionPresentation.Windows {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        private void FilePathEstablishment_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
     }
 }
