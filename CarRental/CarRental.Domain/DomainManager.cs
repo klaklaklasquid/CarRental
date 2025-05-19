@@ -43,22 +43,12 @@ namespace CarRental.Domain {
             return _carRepository.GetCarByAirportId(id);
         }
 
-        public List<CarDTO> GetCar() {
-            return _carRepository.GetCar();
-        }
-
         public List<ReservationDTO> GetReservations() {
             return _reservationRepository.GetReservations();
         }
 
-        public void SetReservation(ReservationDTO reservation) {
-
-            _reservationRepository.SetReservation(new Reservation(
-                reservation.CustomerEmail,
-                reservation.StartDate,
-                reservation.EndDate,
-                reservation.CarLicensePlate
-            ));
+        public void SetReservation(Reservation reservation) {
+            _reservationRepository.SetReservation(reservation);
         }
     }
 }

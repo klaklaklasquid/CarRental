@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -132,6 +133,16 @@ namespace CarRental.Domain.Model {
             Zipcode = zipcode;
             City = city;
             Country = country;
+        }
+
+        public Customer(CustomerDTO customer) {
+            FirstName = customer.FirstName;
+            LastName = customer.LastName;
+            Email = customer.Email;
+            Street = customer.Street;
+            Zipcode = customer.Zipcode;
+            City = customer.City;
+            Country = customer.Country;
         }
 
         public Customer(int id, string firstName, string lastName, string email, string street, string zipcode, string city, string country) : this(firstName, lastName, email, street, zipcode, city, country) {

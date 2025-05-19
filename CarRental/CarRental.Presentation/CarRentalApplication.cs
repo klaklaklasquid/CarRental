@@ -56,11 +56,7 @@ namespace CarRental.Presentation {
             return _domainManager.GetCarByAirportId(id);
         }
 
-        public List<CarDTO> GetCar() {
-            return _domainManager.GetCar();
-        }
-
-        public void SetReservation(ReservationDTO reservation) {
+        public void SetReservation(Reservation reservation) {
             _domainManager.SetReservation(reservation);
         }
 

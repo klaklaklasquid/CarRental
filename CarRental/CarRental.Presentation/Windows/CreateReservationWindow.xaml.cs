@@ -1,4 +1,5 @@
 ﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -158,11 +159,11 @@ namespace CarRental.Presentation.Windows {
                 endDatePicker.SelectedDate.HasValue &&
                 carsListName.SelectedItem is CarDTO &&
                 establishmentsListName.SelectedItem is EstablishmentDTO) {
-                _application.SetReservation(new ReservationDTO(
-                    _user.Email,
+                _application.SetReservation(new Reservation(
+                    new Customer(_user),
                     startDatePicker.SelectedDate.Value,
                     endDatePicker.SelectedDate.Value,
-                    ((CarDTO)carsListName.SelectedItem).LicensePlate));
+                    new Car((CarDTO)carsListName.SelectedItem)));
                 this.Hide();
                 establishmentsListName.SelectedItem = null;
                 carsListName.SelectedItem = null;

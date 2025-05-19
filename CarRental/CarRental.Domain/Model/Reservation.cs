@@ -13,11 +13,11 @@ namespace CarRental.Domain.Model {
             set { _id = value; }
         }
 
-        private string _customerEmail;
+        private Customer _customer;
 
-        public string CustomerEmail {
-            get { return _customerEmail; }
-            set { _customerEmail = value; }
+        public Customer Customer {
+            get { return _customer; }
+            set { _customer = value; }
         }
 
         private DateTime _startTime;
@@ -34,21 +34,22 @@ namespace CarRental.Domain.Model {
             set { _endTime = value; }
         }
 
-        private string _carLicensePlate;
+        private Car _car;
 
-        public string CarLicensePlate {
-            get { return _carLicensePlate; }
-            set { _carLicensePlate = value; }
+        public Car Car {
+            get { return  _car; }
+            set {  _car = value; }
         }
 
-        public Reservation(string customerEmail, DateTime startTime, DateTime endTime, string carLicensePlate) {
-            CustomerEmail = customerEmail;
+
+        public Reservation(Customer customer, DateTime startTime, DateTime endTime, Car car) {
+            Customer = customer;
             StartTime = startTime;
             EndTime = endTime;
-            CarLicensePlate = carLicensePlate;
+            Car = car;
         }
 
-        public Reservation(int id, string customerEmail, DateTime startTime, DateTime endTime, string carLicensePlate) : this(customerEmail, startTime, endTime, carLicensePlate) {
+        public Reservation(int id, Customer customer, DateTime startTime, DateTime endTime, Car car) : this(customer, startTime, endTime, car) {
             Id = id;
         }
 

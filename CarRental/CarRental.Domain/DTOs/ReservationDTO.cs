@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CarRental.Domain.DTOs {
     public class ReservationDTO {
-        public string CustomerEmail { get; set; }
+        public CustomerDTO Customer { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string CarLicensePlate { get; set; }
+        public CarDTO Car { get; set; }
 
-        public ReservationDTO(string customerEmail, DateTime startDate, DateTime endDate, string carLicensePlate) {
-            CustomerEmail = customerEmail;
+        public ReservationDTO(CustomerDTO customer, DateTime startDate, DateTime endDate, CarDTO car) {
+            Customer = customer;
             StartDate = startDate;
             EndDate = endDate;
-            CarLicensePlate = carLicensePlate;
+            Car = car;
         }
     }
 }

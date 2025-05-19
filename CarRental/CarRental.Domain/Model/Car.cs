@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
@@ -96,6 +97,15 @@ namespace CarRental.Domain.Model {
             Seats = seats;
             EngineType = engineType;
             AirportId = airportId;
+        }
+
+        public Car(CarDTO car) {
+            Id = car.Id;
+            LicencePlate = car.LicensePlate;
+            Brand = car.Brand;
+            Seats = car.Seats;
+            EngineType = car.EngineType;
+            AirportId = car.AirportId;
         }
 
         public Car(int id, string licencePlate, string brand, int seats, string engineType, int airportId) : this(licencePlate, brand, seats, engineType, airportId) {
