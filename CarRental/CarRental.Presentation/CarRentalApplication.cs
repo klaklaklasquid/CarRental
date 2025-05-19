@@ -48,12 +48,24 @@ namespace CarRental.Presentation {
             return _domainManager.GetEstablishments();
         }
 
+        public List<CustomerDTO> GetCustomers() {
+            return _domainManager.GetCustomers();
+        }
+
         public List<CarDTO> GetCarByAirportId(int id) {
             return _domainManager.GetCarByAirportId(id);
         }
 
+        public List<CarDTO> GetCar() {
+            return _domainManager.GetCar();
+        }
+
         public void SetReservation(ReservationDTO reservation) {
             _domainManager.SetReservation(reservation);
+        }
+
+        public List<ReservationDTO> GetReservations() {
+            return _domainManager.GetReservations();
         }
 
         public void ChangeWindow(Object window, CustomerDTO ctr) {

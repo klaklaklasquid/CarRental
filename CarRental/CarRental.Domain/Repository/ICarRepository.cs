@@ -12,5 +12,6 @@ namespace CarRental.Domain.Repository {
         void InitData(string csvFile);
 
         List<CarDTO> GetCarByAirportId(int id);
+        List<CarDTO> GetCar();
     }
 }

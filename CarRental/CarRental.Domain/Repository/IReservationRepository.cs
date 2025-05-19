@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Model;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace CarRental.Domain.Repository {
         void WipeDatabase();
 
         void SetReservation(Reservation reservation);
+        List<ReservationDTO> GetReservations();
     }
 }

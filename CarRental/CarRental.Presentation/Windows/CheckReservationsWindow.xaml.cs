@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,23 @@ namespace CarRental.Presentation.Windows {
     /// </summary>
     public partial class CheckReservationsWindow : Window {
         private readonly CarRentalApplication _application;
+        private readonly List<CustomerDTO> _customer;
+        private readonly List<CarDTO> _car;
+        private readonly List<EstablishmentDTO> _establishment;
+        private readonly List<ReservationDTO> _reservations;
 
         public CheckReservationsWindow(CarRentalApplication application) {
             InitializeComponent();
 
             _application = application;
-            establishmentList.ItemsSource = _application.GetEstablishments();
+
+            _establishment = _application.GetEstablishments();
+            _car = _application.GetCar();
+            _customer = _application.GetCustomers();
+            _reservations = _application.GetReservations();
+
+            establishmentList.ItemsSource = _establishment;
+            reservationList.ItemsSource = _reservations;
         }
     }
 }

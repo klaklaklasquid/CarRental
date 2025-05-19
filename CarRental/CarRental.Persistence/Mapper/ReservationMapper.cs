@@ -1,4 +1,5 @@
-﻿using CarRental.Domain.Model;
+﻿using CarRental.Domain.DTOs;
+using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Data.SqlClient;
 using System;
@@ -34,6 +35,28 @@ namespace CarRental.Persistence.Mapper {
                 command.Parameters.AddWithValue("@EindDatum", reservation.EndTime);
                 command.Parameters.AddWithValue("@AutoNummerPlaat", reservation.CarLicensePlate);
                 command.ExecuteNonQuery();
+            } finally {
+                _connection.Close();
+            }
+        }
+
+        public List<ReservationDTO> GetReservations() {
+            try {
+                List<ReservationDTO> reservations = new();
+                _connection.Open();
+                using SqlCommand command = new("SELECT * FROM Reservaties", _connection);
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        string email = (string)reader["KlantEmail"];
+                        DateTime startDate = (DateTime)reader["StartDatum"];
+                        DateTime endDate = (DateTime)reader["EindDatum"];
+                        string licensePlate = (string)reader["AutoNummerplaat"];
+
+                        reservations.Add(new ReservationDTO(email, startDate, endDate, licensePlate));
+                    }
+                }
+                return reservations;
             } finally {
                 _connection.Close();
             }
