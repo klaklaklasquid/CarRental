@@ -44,7 +44,7 @@ namespace CarRental.Persistence.Mapper {
             try {
                 List<ReservationDTO> reservations = new();
                 _connection.Open();
-                using SqlCommand command = new("SELECT * from Reservaties r join Klanten k on r.klantEmail = k.email join Autos a on r.autoNummerplaat = a.Nummerplaat", _connection);
+                using SqlCommand command = new("SELECT a.Id as CarId, k.Postcode as CustomerZipcode, k.Straat as CustomerStreet, k.Land as CustomerCountry, v.Postcode as EstablishmentZipcode, v.Straat as EstablishmentStreet, v.Land as EstablishmentCountry, v.Id as EstablishmentId, * from Reservaties r join Klanten k on r.klantEmail = k.email join Autos a on r.autoNummerplaat = a.Nummerplaat join Vestigingen v on a.Luchthaven_id = v.Id", _connection);
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows) {
                     while (reader.Read()) {
@@ -52,28 +52,38 @@ namespace CarRental.Persistence.Mapper {
                         string firstName = (string)reader["Voornaam"];
                         string lastName = (string)reader["Achternaam"];
                         string email = (string)reader["Email"];
-                        string Zipcode = (string)reader["Postcode"];
-                        string street = (string)reader["Straat"];
+                        string zipcode = (string)reader["CustomerZipcode"];
+                        string street = (string)reader["CustomerStreet"];
                         string city = (string)reader["Woonplaats"];
-                        string country = (string)reader["Land"];
+                        string country = (string)reader["CustomerCountry"];
 
-                        CustomerDTO customer = new(firstName, lastName, email, Zipcode, street, city, country);
+                        CustomerDTO customer = new(firstName, lastName, email, zipcode, street, city, country);
 
                         // create car
-                        int id = (int)reader["Id"];
+                        int carId = (int)reader["CarId"];
                         string licensePlate = (string)reader["Nummerplaat"];
                         string brand = (string)reader["Model"];
                         int seats = (int)reader["Zitplaatsen"];
                         string EngineType = (string)reader["Motortype"];
                         int airportId = (int)reader["Luchthaven_id"];
 
-                        CarDTO car = new(id, licensePlate, brand, seats, EngineType, airportId);
+                        CarDTO car = new(carId, licensePlate, brand, seats, EngineType, airportId);
+
+                        // create Establishment
+                        int establishmentId = (int)reader["EstablishmentId"];
+                        string establishmentAirport = (string)reader["Luchthaven"];
+                        string establishmentStreet = (string)reader["EstablishmentStreet"];
+                        string establishmentZipcode = (string)reader["EstablishmentZipcode"];
+                        string establishmentCity = (string)reader["Plaats"];
+                        string establishmentCountry = (string)reader["EstablishmentCountry"];
+
+                        EstablishmentDTO establishment = new(establishmentId, establishmentAirport, establishmentStreet, establishmentZipcode, establishmentCity, establishmentCountry);
 
                         // create reservation
                         DateTime startDate = (DateTime)reader["StartDatum"];
                         DateTime endDate = (DateTime)reader["EindDatum"];
 
-                        ReservationDTO reservation = new(customer, startDate, endDate, car);
+                        ReservationDTO reservation = new(customer, startDate, endDate, car, establishment);
                         reservations.Add(reservation);
                     }
                 }
