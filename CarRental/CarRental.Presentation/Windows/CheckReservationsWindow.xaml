@@ -57,12 +57,14 @@
                            HorizontalAlignment="Center"/>
 
                 <ListView x:Name="establishmentList"
+                          PreviewMouseDown="establishmentList_PreviewMouseDown"
                           />
             </StackPanel>
         </Grid>
 
         <!-- ListView of reservations -->
         <ListView x:Name="reservationList"
-                  Grid.Column="1"/>
+                  Grid.Column="1"
+                  />
     </Grid>
 </Window>
