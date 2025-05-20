@@ -45,12 +45,12 @@ namespace CarRental.Presentation.Windows {
             carsListName.ItemsSource = cars;
 
             if (!carsListName.HasItems) {
-                carListError.Opacity = 1;
+                carListError.Visibility = Visibility.Visible;
                 carListError.Text = _isChecked
                     ? $"There are no cars with {_seats} seats available at this location."
                     : "There are currently no cars available at this location.";
             } else {
-                carListError.Opacity = 0;
+                carListError.Visibility = Visibility.Collapsed;
                 carListError.Text = "";
             }
 
