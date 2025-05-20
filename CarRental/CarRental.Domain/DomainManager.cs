@@ -66,7 +66,7 @@ namespace CarRental.Domain {
                 new List<CustomerDTO>(GetCustomers()) :
                 new List<CustomerDTO>(GetCustomers()).Where(c => {
                     string fullName = $"{c.FirstName} {c.LastName}";
-                    return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase); 
+                    return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
                 });
         }
 
@@ -74,14 +74,7 @@ namespace CarRental.Domain {
 
         #region CreateReservationScreen Logic
 
-        // filter for which cars get shown according to establishment id
-        public List<CarDTO> GetFilterdCarSeats(bool state, int id) {
-            if(state) {
-                return GetCarByAirportId(id).Where(c => c.Seats == minimum_Seats).ToList(); 
-            } else {
-                return GetCarByAirportId(id).ToList();
-            }
-        }
+        
 
         #endregion
     }

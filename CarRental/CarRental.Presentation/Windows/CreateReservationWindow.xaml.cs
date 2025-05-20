@@ -29,25 +29,29 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void HandleChangeList(object sender, SelectionChangedEventArgs e) {
-            if (establishmentsListName.SelectedItem == null) return;
-            EstablishmentDTO selectedEstablishment = (EstablishmentDTO)establishmentsListName.SelectedItem;
+            if (establishmentsListName.SelectedItem is not EstablishmentDTO selectedEstablishment)
+                return;
+
             _airportId = selectedEstablishment.Id;
 
-            carsListName.ItemsSource = _application.GetFilterdCarSeats(_isChecked, _airportId);
+            IEnumerable<CarDTO> cars = _isChecked
+                ? _application.GetCarByAirportId(_airportId).Where(car => car.Seats == _seats)
+                : _application.GetCarByAirportId(_airportId);
 
-            if (!carsListName.HasItems) {
-                carListError.Opacity = 1;
-                carListError.Text = _isChecked
+            carsListName.ItemsSource = cars;
+
+            bool hasCars = carsListName.HasItems;
+            carListError.Opacity = hasCars ? 0 : 1;
+            carListError.Text = hasCars
+                ? string.Empty
+                : _isChecked
                     ? $"There are no cars with {_seats} seats available at this location."
                     : "There are currently no cars available at this location.";
-            } else {
-                carListError.Opacity = 0;
-                carListError.Text = "";
-            }
 
             placeholderForAirport.Text = selectedEstablishment.Airport;
             placeholderForCar.Text = string.Empty;
         }
+
 
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
             if (!carsListName.HasItems) {

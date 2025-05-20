@@ -91,9 +91,7 @@ namespace CarRental.Presentation {
 
         #region CreateReservationScreen Logic
 
-        public List<CarDTO> GetFilterdCarSeats(bool state, int id) {
-            return _domainManager.GetFilterdCarSeats(state, id);
-        }
+       
 
         #endregion
     }
