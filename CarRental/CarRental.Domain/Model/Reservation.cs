@@ -11,35 +11,57 @@ namespace CarRental.Domain.Model {
 
         public int Id {
             get { return _id; }
-            set { _id = value; }
+            set {
+                if (value < 0)
+                    throw new ArgumentException("Id must be a positive integer.", nameof(Id));
+                _id = value;
+            }
         }
 
         private Customer _customer;
 
         public Customer Customer {
             get { return _customer; }
-            set { _customer = value; }
+            set {
+                if (value == null)
+                    throw new ArgumentNullException("Customer cannot be null.", nameof(Customer));
+                _customer = value;
+            }
         }
 
         private DateTime _startTime;
 
         public DateTime StartTime {
             get { return _startTime; }
-            set { _startTime = value; }
+            set {
+                if (value == default)
+                    throw new ArgumentException("StartTime must be a valid date.", nameof(StartTime));
+                _startTime = value;
+            }
         }
 
         private DateTime _endTime;
 
         public DateTime EndTime {
             get { return _endTime; }
-            set { _endTime = value; }
+            set {
+                if (value == default)
+                    throw new ArgumentException("EndTime must be a valid date.", nameof(EndTime));
+                if (_startTime != default && value < _startTime)
+                    throw new ArgumentException("EndTime cannot be before StartTime.", nameof(EndTime));
+                _endTime = value;
+            }
         }
 
         private Car _car;
 
         public Car Car {
             get { return _car; }
-            set { _car = value; }
+            set {
+                if (value == null)
+                    throw new ArgumentNullException("Car cannot be null.", nameof(Car));
+                _car = value;
+            }
         }
 
         private Establishment _establishment;
@@ -49,7 +71,6 @@ namespace CarRental.Domain.Model {
             set { _establishment = value; }
         }
 
-
         public Reservation(Customer customer, DateTime startTime, DateTime endTime, Car car) {
             Customer = customer;
             StartTime = startTime;
@@ -58,6 +79,8 @@ namespace CarRental.Domain.Model {
         }
 
         public Reservation(ReservationDTO reservation) {
+            if (reservation == null)
+                throw new ArgumentNullException(nameof(reservation), "ReservationDTO cannot be null.");
             Customer = new Customer(reservation.Customer);
             StartTime = reservation.StartDate;
             EndTime = reservation.EndDate;
