@@ -95,6 +95,6 @@ namespace CarRental.Presentation {
             return _domainManager.GetFilterdCarSeats(state, id);
         }
 
-        #region
+        #endregion
     }
 }
