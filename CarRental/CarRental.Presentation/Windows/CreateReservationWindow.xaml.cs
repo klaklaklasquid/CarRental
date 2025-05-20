@@ -33,17 +33,12 @@ namespace CarRental.Presentation.Windows {
                 return;
 
             _airportId = selectedEstablishment.Id;
-
-            IEnumerable<CarDTO> cars = _isChecked
-                ? _application.GetCarByAirportId(_airportId).Where(car => car.Seats == _seats)
-                : _application.GetCarByAirportId(_airportId);
-
-            carsListName.ItemsSource = cars;
+            carsListName.ItemsSource = _application.GetFilterdCarSeats(_isChecked, _airportId, _seats);
 
             bool hasCars = carsListName.HasItems;
             carListError.Opacity = hasCars ? 0 : 1;
             carListError.Text = hasCars
-                ? string.Empty
+                ? ""
                 : _isChecked
                     ? $"There are no cars with {_seats} seats available at this location."
                     : "There are currently no cars available at this location.";
@@ -53,18 +48,14 @@ namespace CarRental.Presentation.Windows {
         }
 
 
-        private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
-            if (!carsListName.HasItems) {
-                carListError.Opacity = 1;
-                carListError.Text = "There are currently no cars available at this location.";
-            } else {
-                carListError.Opacity = 0;
-                carListError.Text = "";
-            }
 
-            if (carsListName.SelectedItem != null) {
-                placeholderForCar.Text = ((CarDTO)carsListName.SelectedItem).Brand;
-            }
+
+        private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
+            bool hasCars = carsListName.HasItems;
+            carListError.Opacity = hasCars ? 0 : 1;
+            carListError.Text = hasCars ? string.Empty : "There are currently no cars available at this location.";
+
+            placeholderForCar.Text = carsListName.SelectedItem is CarDTO car ? car.Brand : string.Empty;
         }
 
         public void GetCustomer(CustomerDTO user) {

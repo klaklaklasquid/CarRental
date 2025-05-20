@@ -6,8 +6,6 @@ using Microsoft.Win32;
 
 namespace CarRental.Domain {
     public class DomainManager {
-        private const int minimum_Seats = 2;
-
         private readonly ICarRepository _carRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IEstablishmentRepository _establishmentRepository;
@@ -74,7 +72,16 @@ namespace CarRental.Domain {
 
         #region CreateReservationScreen Logic
 
-        
+        // filter for which cars get shown according to establishment id
+        public IEnumerable<CarDTO> GetFilterdCarSeats(bool state, int id, int seats) {
+            IEnumerable<CarDTO> cars;
+            if (state) {
+                cars = GetCarByAirportId(id).Where(c => c.Seats == seats);
+            } else {
+                cars = GetCarByAirportId(id);
+            }
+            return cars;
+        }
 
         #endregion
     }
