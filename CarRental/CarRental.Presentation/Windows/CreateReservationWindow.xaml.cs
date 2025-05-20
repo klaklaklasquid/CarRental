@@ -157,13 +157,38 @@ namespace CarRental.Presentation.Windows {
         private void Button_Click(object sender, RoutedEventArgs e) {
             if (startDatePicker.SelectedDate.HasValue &&
                 endDatePicker.SelectedDate.HasValue &&
-                carsListName.SelectedItem is CarDTO &&
+                carsListName.SelectedItem is CarDTO selectedCar &&
                 establishmentsListName.SelectedItem is EstablishmentDTO) {
+
+                DateTime newStart = startDatePicker.SelectedDate.Value;
+                DateTime newEnd = endDatePicker.SelectedDate.Value;
+
+                // Get all reservations for this car
+                var reservations = _application.GetReservations()
+                    .Where(r => r.Car.LicensePlate == selectedCar.LicensePlate);
+
+                // Check for overlap
+                bool isOverlap = reservations.Any(r =>
+                    newStart <= r.EndDate && newEnd >= r.StartDate
+                );
+
+                if (isOverlap) {
+                    MessageBox.Show(
+                        "This car is already reserved for the selected dates.",
+                        "Reservation Conflict",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    return;
+                }
+
+                // No overlap, create reservation
                 _application.SetReservation(new Reservation(
                     new Customer(_user),
-                    startDatePicker.SelectedDate.Value,
-                    endDatePicker.SelectedDate.Value,
-                    new Car((CarDTO)carsListName.SelectedItem)));
+                    newStart,
+                    newEnd,
+                    new Car(selectedCar)
+                ));
                 this.Hide();
                 establishmentsListName.SelectedItem = null;
                 carsListName.SelectedItem = null;
@@ -178,5 +203,6 @@ namespace CarRental.Presentation.Windows {
                 );
             }
         }
+
     }
 }
