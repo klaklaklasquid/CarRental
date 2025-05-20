@@ -10,15 +10,9 @@ namespace CarRental.Presentation.Windows {
     public partial class MainWindow : Window {
         private readonly CarRentalApplication _application;
 
-        private readonly List<CustomerDTO> _customers;
-        private IEnumerable<CustomerDTO> _linqQuery;
-
         public MainWindow(CarRentalApplication application) {
             InitializeComponent();
             _application = application;
-
-            _customers = _application.GetCustomers();
-            _linqQuery = _customers;
             loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
 
@@ -28,15 +22,6 @@ namespace CarRental.Presentation.Windows {
             } else {
                 placeholder.Opacity = 1;
             }
-
-            //string filter = userInput.Text.Trim().ToLower();
-
-            //_linqQuery = string.IsNullOrWhiteSpace(filter)
-            //    ? _customers
-            //    : _customers.Where(c => {
-            //        var fullName = $"{c.FirstName} {c.LastName}".Trim();
-            //        return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
-            //    });
 
             loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
