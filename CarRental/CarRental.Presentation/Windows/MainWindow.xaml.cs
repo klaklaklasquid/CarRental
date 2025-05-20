@@ -8,18 +8,16 @@ namespace CarRental.Presentation.Windows {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private readonly DomainManager _domainManager;
         private readonly CarRentalApplication _application;
 
         private readonly List<CustomerDTO> _customers;
         private IEnumerable<CustomerDTO> _linqQuery;
 
-        public MainWindow(CarRentalApplication application, DomainManager domainManager) {
+        public MainWindow(CarRentalApplication application) {
             InitializeComponent();
-            _domainManager = domainManager;
             _application = application;
 
-            _customers = _domainManager.GetCustomers();
+            _customers = _application.GetCustomers();
             _linqQuery = _customers;
             loginListNames.ItemsSource = _linqQuery;
         }

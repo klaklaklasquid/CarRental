@@ -22,8 +22,8 @@ namespace CarRental.Presentation {
         public CarRentalApplication(DomainManager domainManager) {
             _domainManager = domainManager;
 
-            _mainWindow = new MainWindow(this, _domainManager);
-            _chooseOptionWindow = new ChooseOptionWindow(this, _domainManager);
+            _mainWindow = new MainWindow(this);
+            _chooseOptionWindow = new ChooseOptionWindow(this);
             _createReservationWindow = new CreateReservationWindow(this);
             _checkReservationsWindow = new CheckReservationsWindow(this);
             _carOverviewWindow = new CarOverviewWindow(this);

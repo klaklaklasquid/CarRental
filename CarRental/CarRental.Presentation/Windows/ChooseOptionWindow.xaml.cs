@@ -9,14 +9,10 @@ namespace CarRental.Presentation.Windows {
     /// </summary>
     public partial class ChooseOptionWindow : Window {
         internal event EventHandler<string> OpenWindowRequested;
-
-        private readonly DomainManager _domainManager;
         private readonly CarRentalApplication _application;
 
-        public ChooseOptionWindow(CarRentalApplication application ,DomainManager domainManager) {
+        public ChooseOptionWindow(CarRentalApplication application) {
             InitializeComponent();
-
-            _domainManager = domainManager;
             _application = application;
         }
 
@@ -26,7 +22,7 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            if(sender is Button button) {
+            if (sender is Button button) {
                 OpenWindowRequested.Invoke(this, button.Tag.ToString());
             }
         }
