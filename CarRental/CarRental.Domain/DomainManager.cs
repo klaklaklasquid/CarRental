@@ -55,5 +55,19 @@ namespace CarRental.Domain {
             Reservation res = new(reservation);
             _reservationRepository.DeleteReservation(res);
         }
+
+        #region MainScreen Logic
+
+        // filter for username
+        public IEnumerable<CustomerDTO> GetFilterUserMainScreen(string filter) {
+            return string.IsNullOrWhiteSpace(filter) ?
+                new List<CustomerDTO>(GetCustomers()) :
+                new List<CustomerDTO>(GetCustomers()).Where(c => {
+                    string fullName = $"{c.FirstName} {c.LastName}";
+                    return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase); 
+                });
+        }
+
+        #endregion
     }
 }

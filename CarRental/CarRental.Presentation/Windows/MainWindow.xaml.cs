@@ -19,7 +19,7 @@ namespace CarRental.Presentation.Windows {
 
             _customers = _application.GetCustomers();
             _linqQuery = _customers;
-            loginListNames.ItemsSource = _linqQuery;
+            loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -29,16 +29,16 @@ namespace CarRental.Presentation.Windows {
                 placeholder.Opacity = 1;
             }
 
-            string filter = userInput.Text.Trim().ToLower();
+            //string filter = userInput.Text.Trim().ToLower();
 
-            _linqQuery = string.IsNullOrWhiteSpace(filter)
-                ? _customers
-                : _customers.Where(c => {
-                    var fullName = $"{c.FirstName} {c.LastName}".Trim();
-                    return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
-                });
+            //_linqQuery = string.IsNullOrWhiteSpace(filter)
+            //    ? _customers
+            //    : _customers.Where(c => {
+            //        var fullName = $"{c.FirstName} {c.LastName}".Trim();
+            //        return fullName.StartsWith(filter, StringComparison.CurrentCultureIgnoreCase);
+            //    });
 
-            loginListNames.ItemsSource = _linqQuery;
+            loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e) {

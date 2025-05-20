@@ -48,6 +48,15 @@ namespace CarRental.Presentation {
             }
         }
 
+        public void ChangeWindow(Object window, CustomerDTO ctr) {
+            if (window is MainWindow) {
+                User = ctr;
+                _chooseOptionWindow.GetCustomer(User);
+                _chooseOptionWindow.Show();
+                _mainWindow.Hide();
+            }
+        }
+
         public List<EstablishmentDTO> GetEstablishments() {
             return _domainManager.GetEstablishments();
         }
@@ -72,13 +81,12 @@ namespace CarRental.Presentation {
             _domainManager.DeleteReservation(reservation);
         }
 
-        public void ChangeWindow(Object window, CustomerDTO ctr) {
-            if (window is MainWindow) {
-                User = ctr;
-                _chooseOptionWindow.GetCustomer(User);
-                _chooseOptionWindow.Show();
-                _mainWindow.Hide();
-            }
+        #region MainScreen Logic
+
+        public IEnumerable<CustomerDTO> GetFilterUserMainScreen(string filter) {
+            return _domainManager.GetFilterUserMainScreen(filter);
         }
+
+        #endregion
     }
 }
