@@ -108,7 +108,8 @@
                 FontSize="16"
                 Foreground="Red"
                 Text="No cars found"
-                Visibility="Collapsed" />
+                TextWrapping="Wrap"
+                Opacity="0" />
         </Grid>
 
         <!--  Reservation Details  -->
