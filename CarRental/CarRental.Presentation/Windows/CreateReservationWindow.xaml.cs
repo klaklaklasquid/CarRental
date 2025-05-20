@@ -29,20 +29,11 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void HandleChangeList(object sender, SelectionChangedEventArgs e) {
-            if (establishmentsListName.SelectedItem == null)
-                return;
+            if (establishmentsListName.SelectedItem == null) return;
+            EstablishmentDTO selectedEstablishment = (EstablishmentDTO)establishmentsListName.SelectedItem;
+            _airportId = selectedEstablishment.Id;
 
-            _airportId = ((EstablishmentDTO)establishmentsListName.SelectedItem).Id;
-
-            IEnumerable<CarDTO> cars;
-
-            if (_isChecked) {
-                cars = _application.GetCarByAirportId(_airportId).Where(car => car.Seats == _seats);
-            } else {
-                cars = _application.GetCarByAirportId(_airportId);
-            }
-
-            carsListName.ItemsSource = cars;
+            carsListName.ItemsSource = _application.GetFilterdCarSeats(_isChecked, _airportId);
 
             if (!carsListName.HasItems) {
                 carListError.Opacity = 1;
@@ -54,7 +45,7 @@ namespace CarRental.Presentation.Windows {
                 carListError.Text = "";
             }
 
-            placeholderForAirport.Text = ((EstablishmentDTO)establishmentsListName.SelectedItem).Airport;
+            placeholderForAirport.Text = selectedEstablishment.Airport;
             placeholderForCar.Text = string.Empty;
         }
 
