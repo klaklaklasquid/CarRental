@@ -17,11 +17,13 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-            if (userInput.Text.Length > 0) {
-                placeholder.Opacity = 0;
-            } else {
-                placeholder.Opacity = 1;
-            }
+            //if (userInput.Text.Length > 0) {
+            //    placeholder.Opacity = 0;
+            //} else {
+            //    placeholder.Opacity = 1;
+            //}
+
+            _ = userInput.Text.Length > 0 ? placeholder.Opacity = 0 : placeholder.Opacity = 1;
 
             loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
