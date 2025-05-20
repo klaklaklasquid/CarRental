@@ -17,14 +17,7 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-            //if (userInput.Text.Length > 0) {
-            //    placeholder.Opacity = 0;
-            //} else {
-            //    placeholder.Opacity = 1;
-            //}
-
             _ = userInput.Text.Length > 0 ? placeholder.Opacity = 0 : placeholder.Opacity = 1;
-
             loginListNames.ItemsSource = _application.GetFilterUserMainScreen(userInput.Text.Trim().ToLower());
         }
 
@@ -33,7 +26,7 @@ namespace CarRental.Presentation.Windows {
                 MessageBox.Show("Please select a customer from the list.");
                 return;
             }
-            _application.ChangeWindow(this, ((CustomerDTO)loginListNames.SelectedItem));
+            _application.ChangeWindow(this, (CustomerDTO)loginListNames.SelectedItem);
         }
     }
 }
