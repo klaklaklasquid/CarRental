@@ -13,6 +13,7 @@ namespace CarRental.Presentation {
         private readonly ChooseOptionWindow _chooseOptionWindow;
         private readonly CreateReservationWindow _createReservationWindow;
         private readonly CheckReservationsWindow _checkReservationsWindow;
+        private readonly CarOverviewWindow _carOverviewWindow;
 
         public CustomerDTO User { get; set; }
 
@@ -25,12 +26,14 @@ namespace CarRental.Presentation {
             _chooseOptionWindow = new ChooseOptionWindow(this, _domainManager);
             _createReservationWindow = new CreateReservationWindow(this);
             _checkReservationsWindow = new CheckReservationsWindow(this);
+            _carOverviewWindow = new CarOverviewWindow(this);
 
             _mainWindow.Show();
 
             _windowsByTag = new() {
                 {"1", _createReservationWindow},
-                {"2", _checkReservationsWindow}
+                {"2", _checkReservationsWindow},
+                {"3", _carOverviewWindow}
             };
 
             _chooseOptionWindow.OpenWindowRequested += OpenWindows;

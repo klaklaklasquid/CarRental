@@ -44,6 +44,10 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e) {
+            if (loginListNames.SelectedItem == null) {
+                MessageBox.Show("Please select a customer from the list.");
+                return;
+            }
             _application.ChangeWindow(this, ((CustomerDTO)loginListNames.SelectedItem));
         }
     }
