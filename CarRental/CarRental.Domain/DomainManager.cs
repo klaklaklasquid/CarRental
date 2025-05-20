@@ -50,5 +50,10 @@ namespace CarRental.Domain {
         public void SetReservation(Reservation reservation) {
             _reservationRepository.SetReservation(reservation);
         }
+
+        public void DeleteReservation(ReservationDTO reservation) {
+            Reservation res = new(reservation);
+            _reservationRepository.DeleteReservation(res);
+        }
     }
 }

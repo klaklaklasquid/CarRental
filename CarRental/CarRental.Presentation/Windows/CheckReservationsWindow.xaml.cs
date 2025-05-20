@@ -21,6 +21,7 @@ namespace CarRental.Presentation.Windows {
         private readonly CarRentalApplication _application;
         private readonly List<EstablishmentDTO> _establishment;
         private readonly List<ReservationDTO> _allReservations;
+        private CustomerDTO _user;
 
         public CheckReservationsWindow(CarRentalApplication application) {
             InitializeComponent();
@@ -35,6 +36,12 @@ namespace CarRental.Presentation.Windows {
             searchName.TextChanged += FilterChanged;
             searchDate.SelectedDateChanged += FilterChanged;
             establishmentList.SelectionChanged += FilterChanged;
+
+            this.Activated += (s, e) => LoadReservations();
+        }
+
+        public void GetCustomer(CustomerDTO user) {
+            _user = user;
         }
 
         private void FilterChanged(object sender, EventArgs e) {
@@ -59,6 +66,27 @@ namespace CarRental.Presentation.Windows {
             if (item != null && item.IsSelected) {
                 establishmentList.SelectedItem = null;
                 e.Handled = true;
+            }
+        }
+
+        private void LoadReservations() {
+            _allReservations.Clear();
+            _allReservations.AddRange(_application.GetReservations());
+            FilterChanged(null, null);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            ReservationDTO selectedReservation = (ReservationDTO)reservationList.SelectedItem;
+            if (selectedReservation == null) {
+                MessageBox.Show("Please select a reservation to cancel.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (selectedReservation.Customer.Email == _user.Email) {
+                _application.DeleteReservation(selectedReservation);
+                LoadReservations();
+                MessageBox.Show("Reservation cancelled successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            } else {
+                MessageBox.Show("Error: You can only cancel your own reservation.", "Permission Denied", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

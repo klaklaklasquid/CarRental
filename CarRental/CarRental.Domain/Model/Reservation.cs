@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,8 +38,15 @@ namespace CarRental.Domain.Model {
         private Car _car;
 
         public Car Car {
-            get { return  _car; }
-            set {  _car = value; }
+            get { return _car; }
+            set { _car = value; }
+        }
+
+        private Establishment _establishment;
+
+        public Establishment Establishment {
+            get { return _establishment; }
+            set { _establishment = value; }
         }
 
 
@@ -47,6 +55,14 @@ namespace CarRental.Domain.Model {
             StartTime = startTime;
             EndTime = endTime;
             Car = car;
+        }
+
+        public Reservation(ReservationDTO reservation) {
+            Customer = new Customer(reservation.Customer);
+            StartTime = reservation.StartDate;
+            EndTime = reservation.EndDate;
+            Car = new Car(reservation.Car);
+            Establishment = new Establishment(reservation.Establishment);
         }
 
         public Reservation(int id, Customer customer, DateTime startTime, DateTime endTime, Car car) : this(customer, startTime, endTime, car) {

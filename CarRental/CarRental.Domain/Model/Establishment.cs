@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRental.Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.IO;
@@ -102,6 +103,15 @@ namespace CarRental.Domain.Model {
             Zipcode = zipcode;
             City = city;
             Country = country;
+        }
+
+        public Establishment(EstablishmentDTO establishment) {
+            Id = establishment.Id;
+            Airport = establishment.Airport;
+            Street = establishment.Street;
+            Zipcode = establishment.Zipcode;
+            City = establishment.City;
+            Country = establishment.Country;
         }
 
         public Establishment(int id, string airport, string street, string zipcode, string city, string country)

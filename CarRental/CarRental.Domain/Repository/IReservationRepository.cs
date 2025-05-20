@@ -11,6 +11,7 @@ namespace CarRental.Domain.Repository {
         void WipeDatabase();
 
         void SetReservation(Reservation reservation);
+        void DeleteReservation(Reservation reservation);
         List<ReservationDTO> GetReservations();
     }
 }

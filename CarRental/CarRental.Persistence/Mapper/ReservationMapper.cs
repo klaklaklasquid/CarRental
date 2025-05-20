@@ -92,5 +92,19 @@ namespace CarRental.Persistence.Mapper {
                 _connection.Close();
             }
         }
+
+        public void DeleteReservation(Reservation reservation) {
+            try {
+                _connection.Open();
+                using SqlCommand command = new("DELETE FROM Reservaties WHERE KlantEmail = @KlantEmail AND StartDatum = @StartDatum AND EindDatum = @EindDatum AND @AutoNummerPlaat = AutoNummerplaat", _connection);
+                command.Parameters.AddWithValue("@KlantEmail", reservation.Customer.Email);
+                command.Parameters.AddWithValue("@StartDatum", reservation.StartTime);
+                command.Parameters.AddWithValue("@EindDatum", reservation.EndTime);
+                command.Parameters.AddWithValue("@AutoNummerPlaat", reservation.Car.LicencePlate);
+                command.ExecuteNonQuery();
+            } finally {
+                _connection.Close();
+            }
+        }
     }
 }

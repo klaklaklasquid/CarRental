@@ -40,6 +40,7 @@ namespace CarRental.Presentation {
             _windowsByTag.TryGetValue(e, out Window? window);
             if (window != null) {
                 _createReservationWindow.GetCustomer(User);
+                _checkReservationsWindow.GetCustomer(User);
                 window.Show();
             }
         }
@@ -64,12 +65,16 @@ namespace CarRental.Presentation {
             return _domainManager.GetReservations();
         }
 
+        public void DeleteReservation(ReservationDTO reservation) {
+            _domainManager.DeleteReservation(reservation);
+        }
+
         public void ChangeWindow(Object window, CustomerDTO ctr) {
             if (window is MainWindow) {
                 User = ctr;
                 _chooseOptionWindow.GetCustomer(User);
                 _chooseOptionWindow.Show();
-                _mainWindow.Close();
+                _mainWindow.Hide();
             }
         }
     }
