@@ -107,9 +107,9 @@
                 VerticalAlignment="Center"
                 FontSize="16"
                 Foreground="Red"
+                Opacity="0"
                 Text="No cars found"
-                TextWrapping="Wrap"
-                Opacity="0" />
+                TextWrapping="Wrap" />
         </Grid>
 
         <!--  Reservation Details  -->

@@ -47,9 +47,6 @@ namespace CarRental.Presentation.Windows {
             placeholderForCar.Text = string.Empty;
         }
 
-
-
-
         private void HandleChangeCarList(object sender, SelectionChangedEventArgs e) {
             bool hasCars = carsListName.HasItems;
             carListError.Opacity = hasCars ? 0 : 1;
@@ -141,54 +138,52 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            if (startDatePicker.SelectedDate.HasValue &&
-                endDatePicker.SelectedDate.HasValue &&
-                carsListName.SelectedItem is CarDTO selectedCar &&
-                establishmentsListName.SelectedItem is EstablishmentDTO) {
-
-                DateTime newStart = startDatePicker.SelectedDate.Value;
-                DateTime newEnd = endDatePicker.SelectedDate.Value;
-
-                // Get all reservations for this car
-                var reservations = _application.GetReservations()
-                    .Where(r => r.Car.LicensePlate == selectedCar.LicensePlate);
-
-                // Check for overlap
-                bool isOverlap = reservations.Any(r =>
-                    newStart <= r.EndDate && newEnd >= r.StartDate
-                );
-
-                if (isOverlap) {
-                    MessageBox.Show(
-                        "This car is already reserved for the selected dates.",
-                        "Reservation Conflict",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning
-                    );
-                    return;
-                }
-
-                // No overlap, create reservation
-                _application.SetReservation(new Reservation(
-                    new Customer(_user),
-                    newStart,
-                    newEnd,
-                    new Car(selectedCar)
-                ));
-                this.Hide();
-                establishmentsListName.SelectedItem = null;
-                carsListName.SelectedItem = null;
-                startDatePicker.SelectedDate = null;
-                endDatePicker.SelectedDate = null;
-            } else {
+            if (startDatePicker.SelectedDate is not DateTime newStart ||
+                endDatePicker.SelectedDate is not DateTime newEnd ||
+                carsListName.SelectedItem is not CarDTO selectedCar ||
+                establishmentsListName.SelectedItem is not EstablishmentDTO) {
                 MessageBox.Show(
                     "Please make sure you have selected a start date, an end date, and a car before making a reservation.",
                     "Incomplete Reservation",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning
                 );
+                return;
             }
-        }
 
+            // Get all reservations for this car
+            var reservations = _application.GetReservations()
+                .Where(r => r.Car.LicensePlate == selectedCar.LicensePlate);
+
+            // Check for overlap
+            bool isOverlap = reservations.Any(r =>
+                newStart <= r.EndDate && newEnd >= r.StartDate
+            );
+
+            if (isOverlap) {
+                MessageBox.Show(
+                    "This car is already reserved for the selected dates.",
+                    "Reservation Conflict",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+                return;
+            }
+
+            // No overlap, create reservation
+            _application.SetReservation(new Reservation(
+                new Customer(_user),
+                newStart,
+                newEnd,
+                new Car(selectedCar)
+            ));
+
+            // Reset UI
+            this.Hide();
+            establishmentsListName.SelectedItem = null;
+            carsListName.SelectedItem = null;
+            startDatePicker.SelectedDate = null;
+            endDatePicker.SelectedDate = null;
+        }
     }
 }

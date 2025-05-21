@@ -44,25 +44,16 @@ namespace CarRental.Presentation.Windows {
             _user = user;
         }
 
-        private void FilterChanged(object sender, EventArgs e) {
+        private void FilterChanged(object? sender, EventArgs? e) {
             string name = searchName.Text.Trim().ToLower();
             DateTime? date = searchDate.SelectedDate;
-            var selectedEstablishment = establishmentList.SelectedItem as EstablishmentDTO;
+            EstablishmentDTO selectedEstablishment = (EstablishmentDTO)establishmentList.SelectedItem;
 
-            var filtered = _allReservations.Where(r =>
-                (string.IsNullOrEmpty(name) ||
-                    (r.Customer.FirstName + " " + r.Customer.LastName).ToLower().Contains(name)) &&
-                (!date.HasValue ||
-                    (r.StartDate.Date <= date.Value.Date && r.EndDate.Date >= date.Value.Date)) &&
-                (selectedEstablishment == null ||
-                    r.Establishment.Id == selectedEstablishment.Id)
-            ).ToList();
-
-            reservationList.ItemsSource = filtered;
+            reservationList.ItemsSource = _application.GetFilterdReservations(name, date, selectedEstablishment);
         }
 
         private void establishmentList_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
-            var item = ItemsControl.ContainerFromElement(establishmentList, e.OriginalSource as DependencyObject) as ListViewItem;
+            ListViewItem item = (ListViewItem)ItemsControl.ContainerFromElement(establishmentList, e.OriginalSource as DependencyObject);
             if (item != null && item.IsSelected) {
                 establishmentList.SelectedItem = null;
                 e.Handled = true;
@@ -76,12 +67,12 @@ namespace CarRental.Presentation.Windows {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            ReservationDTO selectedReservation = (ReservationDTO)reservationList.SelectedItem;
-            if (selectedReservation == null) {
+            if (reservationList.SelectedItem is not ReservationDTO selectedReservation) {
                 MessageBox.Show("Please select a reservation to cancel.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (selectedReservation.Customer.Email == _user.Email) {
+
+            if (selectedReservation.Customer?.Email == _user?.Email) {
                 _application.DeleteReservation(selectedReservation);
                 LoadReservations();
                 MessageBox.Show("Reservation cancelled successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -89,5 +80,6 @@ namespace CarRental.Presentation.Windows {
                 MessageBox.Show("Error: You can only cancel your own reservation.", "Permission Denied", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

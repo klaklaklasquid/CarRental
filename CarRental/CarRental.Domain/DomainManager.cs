@@ -84,5 +84,22 @@ namespace CarRental.Domain {
         }
 
         #endregion
+
+        #region CheckReservationsScreen Logic
+
+        // filter for which reservations get shown according to the filters
+        public List<ReservationDTO> GetFilterdReservations(string name, DateTime? date, EstablishmentDTO establishment) {
+            List<ReservationDTO> filtered = GetReservations().Where(r =>
+                (string.IsNullOrEmpty(name) ||
+                    (r.Customer.FirstName + " " + r.Customer.LastName).ToLower().Contains(name)) &&
+                (!date.HasValue ||
+                    (r.StartDate.Date <= date.Value.Date && r.EndDate.Date >= date.Value.Date)) &&
+                (establishment == null ||
+                    r.Establishment.Id == establishment.Id)
+            ).ToList();
+            return filtered;
+        }
+
+        #endregion
     }
 }

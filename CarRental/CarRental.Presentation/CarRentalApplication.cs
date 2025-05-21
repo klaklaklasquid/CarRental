@@ -96,5 +96,13 @@ namespace CarRental.Presentation {
         }
 
         #endregion
+
+        #region CheckReservationsScreen Logic
+
+        public List<ReservationDTO> GetFilterdReservations(string name, DateTime? date, EstablishmentDTO establishment) {
+            return _domainManager.GetFilterdReservations(name, date, establishment);
+        }
+
+        #endregion
     }
 }
