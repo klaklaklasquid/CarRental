@@ -104,5 +104,21 @@ namespace CarRental.Presentation {
         }
 
         #endregion
+
+        #region CarOverviewScreen Logic
+
+        public List<CarDTO> GetFilterdCars(EstablishmentDTO establishment, DateTime? date) {
+            return _domainManager.GetFilterdCars(establishment, date);
+        }
+
+        public string GenerateCarOverviewMarkdown(
+            EstablishmentDTO establishment,
+            DateTime date,
+            CarDTO car,
+            List<ReservationDTO> reservations) {
+            return _domainManager.GenerateCarOverviewMarkdown(establishment, date, car, reservations);
+        }
+
+        #endregion
     }
 }

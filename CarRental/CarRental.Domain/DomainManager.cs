@@ -2,6 +2,7 @@
 using CarRental.Domain.Model;
 using CarRental.Domain.Repository;
 using Microsoft.Win32;
+using System.Text;
 
 
 namespace CarRental.Domain {
@@ -98,6 +99,78 @@ namespace CarRental.Domain {
                     r.Establishment.Id == establishment.Id)
             ).ToList();
             return filtered;
+        }
+
+        #endregion
+
+        #region CarOverviewScreen Logic
+
+        // returns list of filterd cars
+        public List<CarDTO> GetFilterdCars(EstablishmentDTO establishment, DateTime? date) {
+            List<CarDTO> cars = GetCarByAirportId(establishment.Id);
+            List<ReservationDTO> reservations = GetReservations();
+
+            return cars.Where(car =>
+                !reservations.Any(res =>
+                    res.Car != null &&
+                    res.Car.Id == car.Id &&
+                    date >= res.StartDate.Date &&
+                    date <= res.EndDate.Date
+                    )
+                ).ToList();
+        }
+
+        public string GenerateCarOverviewMarkdown(
+            EstablishmentDTO establishment,
+            DateTime date,
+            CarDTO car,
+            List<ReservationDTO> reservations) {
+            // Find previous and next reservation relative to date
+            var previousReservation = reservations
+                .Where(r => r.EndDate.Date < date.Date)
+                .OrderByDescending(r => r.EndDate)
+                .FirstOrDefault();
+
+            var nextReservation = reservations
+                .Where(r => r.StartDate.Date > date.Date)
+                .OrderBy(r => r.StartDate)
+                .FirstOrDefault();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("# Overzicht auto's\n");
+            sb.AppendLine($"**Vestiging:** {establishment.Airport}");
+            sb.AppendLine($"**Date:** {date:yyyy-MM-dd}\n");
+            sb.AppendLine($"## {car.LicensePlate} - {car}\n");
+
+            sb.AppendLine("### vorige reservatie:");
+            if (previousReservation != null) {
+                var customer = previousReservation.Customer;
+                sb.AppendLine($"**klant:** {customer?.ToString() ?? "Onbekend"}");
+                sb.AppendLine($"**Straat:** {customer?.Street ?? "Onbekend"}");
+                sb.AppendLine($"**Postcode:** {customer?.Zipcode ?? "Onbekend"}");
+                sb.AppendLine($"**Stad:** {customer?.City ?? "Onbekend"}");
+                sb.AppendLine($"**Land:** {customer?.Country ?? "Onbekend"}");
+                sb.AppendLine($"**periode:** {previousReservation.StartDate:yyyy-MM-dd} t/m {previousReservation.EndDate:yyyy-MM-dd}");
+            } else {
+                sb.AppendLine("Geen vorige reservatie.");
+                sb.AppendLine("No previous reservation.");
+            }
+
+            sb.AppendLine("\n### volgende reservatie:");
+            if (nextReservation != null) {
+                var customer = nextReservation.Customer;
+                sb.AppendLine($"**klant:** {customer?.ToString() ?? "Onbekend"}");
+                sb.AppendLine($"**Straat:** {customer?.Street ?? "Onbekend"}");
+                sb.AppendLine($"**Postcode:** {customer?.Zipcode ?? "Onbekend"}");
+                sb.AppendLine($"**Stad:** {customer?.City ?? "Onbekend"}");
+                sb.AppendLine($"**Land:** {customer?.Country ?? "Onbekend"}");
+                sb.AppendLine($"**periode:** {nextReservation.StartDate:yyyy-MM-dd} t/m {nextReservation.EndDate:yyyy-MM-dd}");
+            } else {
+                sb.AppendLine("Geen volgende reservatie.");
+                sb.AppendLine("No future reservation.");
+            }
+
+            return sb.ToString();
         }
 
         #endregion
