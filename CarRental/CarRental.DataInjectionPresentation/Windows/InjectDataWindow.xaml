@@ -1,168 +1,151 @@
-﻿<Window x:Class="CarRental.DataInjectionPresentation.Windows.InjectDataWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CarRental.DataInjectionPresentation.Windows"
-        mc:Ignorable="d"
-        Title="InjectDataWindow" 
-        Height="450" 
-        Width="800"
-        >
-    <Grid Background="LightGray">
-        <Border Margin="10, 10, 10, 10"
-                BorderBrush="#40000000"
-                BorderThickness="1"
-                CornerRadius="20"
-                Background="white">
-            <Grid>
+﻿<Window
+    x:Class="CarRental.DataInjectionPresentation.Windows.InjectDataWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Inject Data"
+    Width="800"
+    Height="500"
+    Background="#f0f0f0"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*" />
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="0.2*" />
-                </Grid.RowDefinitions>
+    <Grid Margin="20">
+        <Border
+            Padding="30"
+            Background="White"
+            BorderBrush="#40000000"
+            BorderThickness="1"
+            CornerRadius="20">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
 
-                <TextBlock Grid.Row="0" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   Text="Upload Files"
-                   FontSize="20"
-                   FontWeight="Bold"/>
+                <!--  Titel  -->
+                <TextBlock
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Text="Upload Files" />
 
-                <Border Grid.Row="1"
-                        Margin="150,10,150,10"
-                        BorderBrush="#3087ED"
-                        BorderThickness="2"
-                        CornerRadius="10">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right"
-                                >
-                        <TextBlock Text="Establishment File: "
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="#3087ED"
-                                   />
-
-                        <TextBox x:Name="FilePathEstablishment" 
-                                 IsReadOnly="True" 
-                                 Width="auto"
-                                 BorderThickness="0"
-                                 VerticalAlignment="Center"
-                                 TextWrapping="Wrap"
-                                 TextChanged="FilledIn"
-                                 />
-                        <Border CornerRadius="10"
-                                Background="#3087ED"
-                                Margin="10"
-                                >
-                            <Button Content="Browse..."
-                                    Background="Transparent"
-                                    Padding="20,5"
-                                    Foreground="white"
-                                    FontSize="15"
-                                    BorderThickness="0"
-                                    Click="Click_Select_Establishment"
-                              />
-                        </Border>
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="2"
-                        Margin="150,10,150,10"
-                        BorderBrush="#3087ED"
-                        BorderThickness="2"
-                        CornerRadius="10">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right"
-                                >
-                        <TextBlock Text="Car File: "
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="#3087ED"
-                                   />
-
-                        <TextBox x:Name="FilePathCar" 
-                                 IsReadOnly="True" 
-                                 Width="auto"
-                                 BorderThickness="0"
-                                 VerticalAlignment="Center"
-                                 TextWrapping="Wrap"
-                                 TextChanged="FilledIn"
-                                 
-                                 />
-                        <Border CornerRadius="10"
-                                Background="#3087ED"
-                                Margin="10"
-                                >
-                            <Button Content="Browse..."
-                                    Background="Transparent"
-                                    Padding="20,5"
-                                    Foreground="white"
-                                    FontSize="15"
-                                    BorderThickness="0"
-                                    Click="Click_Select_Car"
-                              />
-                        </Border>
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="3"
-                        Margin="150,10,150,10"
-                        BorderBrush="#3087ED"
-                        BorderThickness="2"
-                        CornerRadius="10">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right"
-                                >
-                        <TextBlock Text="Customer File: "
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="#3087ED"
-                                   />
-
-                        <TextBox x:Name="FilePathCustomer" 
-                                 IsReadOnly="True" 
-                                 Width="auto"
-                                 BorderThickness="0"
-                                 VerticalAlignment="Center"
-                                 TextWrapping="Wrap"
-                                 TextChanged="FilledIn"
-                                 />
-                        <Border CornerRadius="10"
-                                Background="#3087ED"
-                                Margin="10"
-                                >
-                            <Button Content="Browse..."
-                                    Background="Transparent"
-                                    Padding="20,5"
-                                    Foreground="white"
-                                    FontSize="15"
-                                    BorderThickness="0"
-                                    Click="Click_Select_Customer"
-                              />
-                        </Border>
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="4"
-                        Margin="150,10,150,10"
+                <!--  Establishment File  -->
+                <StackPanel
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="160"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Foreground="#3087ED"
+                        Text="Establishment File:" />
+                    <TextBox
+                        x:Name="FilePathEstablishment"
+                        Width="400"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        IsReadOnly="True"
+                        TextChanged="FilledIn"
+                        TextWrapping="Wrap" />
+                    <Border
+                        Margin="10,0,0,0"
                         Background="#3087ED"
                         CornerRadius="10">
-                    <Button Background="Transparent"
-                            x:Name="Send_Data"
+                        <Button
+                            Padding="15,5"
+                            Background="Transparent"
                             BorderThickness="0"
-                            Content="Send Data"
-                            FontSize="20"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            IsEnabled="False" Click="Click_Send_Data"
-                            />
+                            Click="Click_Select_Establishment"
+                            Content="Browse..."
+                            Foreground="White" />
+                    </Border>
+                </StackPanel>
 
+                <!--  Car File  -->
+                <StackPanel
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="160"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Foreground="#3087ED"
+                        Text="Car File:" />
+                    <TextBox
+                        x:Name="FilePathCar"
+                        Width="400"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        IsReadOnly="True"
+                        TextChanged="FilledIn"
+                        TextWrapping="Wrap" />
+                    <Border
+                        Margin="10,0,0,0"
+                        Background="#3087ED"
+                        CornerRadius="10">
+                        <Button
+                            Padding="15,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="Click_Select_Car"
+                            Content="Browse..."
+                            Foreground="White" />
+                    </Border>
+                </StackPanel>
+
+                <!--  Customer File  -->
+                <StackPanel
+                    Margin="0,0,0,20"
+                    HorizontalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="160"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Foreground="#3087ED"
+                        Text="Customer File:" />
+                    <TextBox
+                        x:Name="FilePathCustomer"
+                        Width="400"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        IsReadOnly="True"
+                        TextChanged="FilledIn"
+                        TextWrapping="Wrap" />
+                    <Border
+                        Margin="10,0,0,0"
+                        Background="#3087ED"
+                        CornerRadius="10">
+                        <Button
+                            Padding="15,5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="Click_Select_Customer"
+                            Content="Browse..."
+                            Foreground="White" />
+                    </Border>
+                </StackPanel>
+
+                <!--  Send Button  -->
+                <Border
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Background="#3087ED"
+                    CornerRadius="10">
+                    <Button
+                        x:Name="Send_Data"
+                        Padding="20,8"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="Click_Send_Data"
+                        Content="Send Data"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        IsEnabled="False" />
                 </Border>
-            </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

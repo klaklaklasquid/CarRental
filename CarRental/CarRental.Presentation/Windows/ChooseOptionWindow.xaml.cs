@@ -26,5 +26,9 @@ namespace CarRental.Presentation.Windows {
                 OpenWindowRequested.Invoke(this, button.Tag.ToString());
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            Application.Current.Shutdown();
+        }
     }
 }

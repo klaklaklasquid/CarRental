@@ -178,12 +178,25 @@ namespace CarRental.Presentation.Windows {
                 new Car(selectedCar)
             ));
 
+            // message box confirmation
+            MessageBox.Show(
+                "Reservation created successfully!",
+                "Reservation Confirmation",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
             // Reset UI
             this.Hide();
             establishmentsListName.SelectedItem = null;
             carsListName.SelectedItem = null;
             startDatePicker.SelectedDate = null;
             endDatePicker.SelectedDate = null;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            e.Cancel = true;   // Cancel the close
+            this.Hide();       // Hide the window instead
         }
     }
 }

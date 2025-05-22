@@ -81,5 +81,9 @@ namespace CarRental.Presentation.Windows {
             }
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            e.Cancel = true;   // Cancel the close
+            this.Hide();       // Hide the window instead
+        }
     }
 }

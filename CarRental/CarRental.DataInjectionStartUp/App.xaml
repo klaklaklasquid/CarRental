@@ -1,9 +1,8 @@
-﻿<Application x:Class="CarRental.DataInjectionStartUp.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CarRental.DataInjectionStartUp"
-             Startup="Application_Startup">
-    <Application.Resources>
-         
-    </Application.Resources>
+﻿<Application
+    x:Class="CarRental.DataInjectionStartUp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CarRental.DataInjectionStartUp"
+    Startup="Application_Startup">
+    <Application.Resources />
 </Application>

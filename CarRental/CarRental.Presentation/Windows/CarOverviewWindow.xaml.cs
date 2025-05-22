@@ -90,5 +90,10 @@ namespace CarRental.Presentation.Windows {
                 MessageBox.Show("Markdown document saved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            e.Cancel = true;   // Cancel the close
+            this.Hide();       // Hide the window instead
+        }
     }
 }

@@ -11,6 +11,7 @@
     MinWidth="750"
     MinHeight="500"
     Background="White"
+    Closing="Window_Closing"
     mc:Ignorable="d">
 
     <Grid Margin="20">
