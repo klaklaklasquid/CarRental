@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.StartUp", "CarRental.StartUp\CarRental.StartUp.csproj", "{3A2334C4-33A8-4716-B7FF-2A9686E0708D}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.DataInjectionStartUp", "CarRental.DataInjectionStartUp\CarRental.DataInjectionStartUp.csproj", "{4E205312-D523-49A5-9553-E6F17F0C899A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.DataInjectionPresentation", "CarRental.DataInjectionPresentation\CarRental.DataInjectionPresentation.csproj", "{3A7948FE-079F-424E-AC4B-BE08182299BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.UnitTesting", "CarRental.UnitTesting\CarRental.UnitTesting.csproj", "{C72447B6-792B-4BEE-AA33-51FFF01CDDA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{3A7948FE-079F-424E-AC4B-BE08182299BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7948FE-079F-424E-AC4B-BE08182299BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A7948FE-079F-424E-AC4B-BE08182299BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72447B6-792B-4BEE-AA33-51FFF01CDDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72447B6-792B-4BEE-AA33-51FFF01CDDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72447B6-792B-4BEE-AA33-51FFF01CDDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72447B6-792B-4BEE-AA33-51FFF01CDDA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
